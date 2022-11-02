@@ -83,17 +83,17 @@ if __name__ == "__main__":
 # TODO: Cloudcompare achtige path animatie tool
 # TODO: click on plane and set an object with a give "height" allong the face normal
 # TODO: toggle radius cutter,
-# DONE: implement boolcut pannel
+# TODO: make cone and radius sphere density increas as the length grow longer.
 # TODO: preferences panel---- think materials, diameters
 # TODO: checkbox to retain tracking of the cone to secondary point
 # TODO: implement color selector panel
-# DONE: create red, yelow, blue materials on startup
-# TODO: assign materials to the cone  sections
-# TODO: Sync vertices of the uvsphere to  the vertices of the cone in the init script.
-# TODO: make cone and radius sphere density increas as the length grow longer.
-# NOTE: a 32*16 uv-sphere over 10M can have a deviation aprox. 10CM due to the polygonal structure of the curved surface
-# TODO: optimaliseer cutter segmenten tov cutee cone
-# NOTE: its probably better to aim the cone after cleanup
 # TODO: mesh cleaning tools
 # TODO: REFACTOR CLEANUP out of bool_cut_operator
-# NOTE: cleanup expects the vertices to be exactly alligned.
+# DONE: implement boolcut pannel
+# DONE: create red, yelow, blue materials on startup
+# DONE: assign materials to the cone  sections
+# DONE: Sync vertices of the uvsphere to  the vertices of the cone in the init script.
+# DONE: a 32*16 uv-sphere over 10M can have a deviation aprox. 10CM due to the polygonal structure of the curved surface
+# DONE: optimaliseer cutter segmenten tov cutee cone
+# DONE: its probably better to aim the cone after cleanup
+# DONE: cleanup expects the vertices to be exactly alligned.
