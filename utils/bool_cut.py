@@ -78,7 +78,7 @@ def radius_cut(object_to_cut, radius:float, aim_target=None):# -> List[object, o
     original_3dcursor_position = bpy.context.scene.cursor.location
     bpy.context.scene.cursor.location = object_to_cut.location
     # create radius cutter object
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=radius, segments=64, ring_count=32)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=radius, segments=64, ring_count=128)
     cutter = bpy.context.active_object
     if aim_target is not None:
         aim_object_to(cutter, aim_target)
