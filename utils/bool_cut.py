@@ -21,11 +21,10 @@ a set of blender tools to assist in 3D-Forensic analysis
 '''
 
 import bpy
-#from typing import List
 from ..utils.aim_towards import aim_object_to
 
 
-def cut(cutter, cutee):# -> List[object, object]:
+def cut(cutter, cutee):
 
     # setup objects and add modifiers
     object_name = cutee.name
@@ -59,8 +58,7 @@ def cut(cutter, cutee):# -> List[object, object]:
 
     
 def cleanup_verts(obj_to_clean) -> None:
-    # - cleanup only works if the sections of the cutter and cone are equal and are alligned 
-    # - its probably better to aim the cone after cleanup
+    # - cleanup  works as expected   if the sections of the cutter and cone are equal and  alligned 
     if  obj_to_clean.type != 'MESH':
         print(f"{obj_to_clean} is not a MESH object, please select a object of type MESH and try again")
     else:
@@ -69,7 +67,7 @@ def cleanup_verts(obj_to_clean) -> None:
         bpy.ops.mesh.remove_doubles(threshold=0.00001)
         bpy.ops.object.mode_set(mode='OBJECT')
 
-def radius_cut(object_to_cut, radius:float, aim_target=None):# -> List[object, object]:
+def radius_cut(object_to_cut, radius: float, aim_target=None):
     '''
         cut an object with the volume of another
         optional, aim the cutter object to an axis
@@ -77,19 +75,14 @@ def radius_cut(object_to_cut, radius:float, aim_target=None):# -> List[object, o
     # store 3d cursor location
     original_3dcursor_position = bpy.context.scene.cursor.location
     bpy.context.scene.cursor.location = object_to_cut.location
+    
     # create radius cutter object
     bpy.ops.mesh.primitive_uv_sphere_add(radius=radius, segments=64, ring_count=128)
     cutter = bpy.context.active_object
     if aim_target is not None:
         aim_object_to(cutter, aim_target)
     result = cut(cutter, object_to_cut)
+    
     # set 3d cursor back to original position
     bpy.context.scene.cursor.location = original_3dcursor_position
     return result
-
-
-def main() -> None:
-    pass
-
-if __name__ == "__main__":
-    main()

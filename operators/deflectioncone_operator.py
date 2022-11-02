@@ -85,12 +85,7 @@ class FOtools_OT_DeflectionCone(bpy.types.Operator):
             )
             deflectioncone = bpy.context.active_object
             
-        aim_object_to(deflectioncone, secondary_point)
-        # bpy.ops.object.constraint_add(type="TRACK_TO")
-        # bpy.context.object.constraints["Track To"].target = secondary_point
-        # bpy.ops.constraint.apply(constraint="Track To", owner="OBJECT")
-
-        
+        aim_object_to(deflectioncone, secondary_point)      
         self.set_origin(bpy.context.object,self.get_cone_top_vertex_coordinate())
         return deflectioncone
 
