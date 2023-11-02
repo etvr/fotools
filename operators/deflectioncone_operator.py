@@ -85,6 +85,7 @@ class FOtools_OT_DeflectionCone(bpy.types.Operator):
             
         aim_object_to(deflectioncone, secondary_point)      
         self.set_origin(bpy.context.object,self.get_cone_top_vertex_coordinate())
+        deflectioncone.location = secondary_point.location
         return deflectioncone
 
     def get_vertex_world_coordinates(self, obj) -> List[Vector]:
