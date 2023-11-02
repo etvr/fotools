@@ -1,6 +1,4 @@
 '''
-Copyright (C) 2022 Alexander de Bruijn
-
 Created by Alexander de Bruijn 2022
 
     This program is free software: you can redistribute it and/or modify
@@ -92,7 +90,7 @@ class FOtools_OT_Bool_cut(bpy.types.Operator):
     
     def cleanup_verts(self, obj_to_clean) -> None:
         if  obj_to_clean.type != 'MESH':
-            print(f"{obj_to_clean} is not a MESH object, please select a object of type MESH and try again")
+            print(f"{obj_to_clean} is not a MESH object, please select an object of type MESH and try again")
         else:
             bpy.ops.object.mode_set(mode='EDIT')
             bpy.ops.mesh.select_all(action='SELECT')

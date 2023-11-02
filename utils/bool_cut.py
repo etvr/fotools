@@ -1,6 +1,4 @@
 '''
-Copyright (C) 2022 Alexander de Bruijn
-
 Created by Alexander de Bruijn 2022
 
     This program is free software: you can redistribute it and/or modify
@@ -16,8 +14,7 @@ Created by Alexander de Bruijn 2022
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FOtools v0.1
-a set of blender tools to assist in 3D-Forensic analysis
+FOtools:  a set of blender tools to assist in 3D-Forensic analysis
 '''
 
 import bpy
