@@ -1,6 +1,4 @@
 '''
-Copyright (C) 2022 Alexander de Bruijn
-
 Created by Alexander de Bruijn 2022
 
     This program is free software: you can redistribute it and/or modify
@@ -32,7 +30,7 @@ from ..utils.aim_towards import aim_object_to
 class FOtools_OT_DeflectionCone(bpy.types.Operator):
     bl_idname = "mesh.deflection_cone"
     bl_label = "FOtools Deflectioncone"
-    bl_description = "Creates a cone with an given angle and length along a line between two given objects"
+    bl_description = "Creates a cone with an user-given angle and length along the extension of two objects"
     bl_options = {"UNDO"}
 
     @classmethod
@@ -72,7 +70,7 @@ class FOtools_OT_DeflectionCone(bpy.types.Operator):
             )
             deflectioncone = bpy.context.active_object
         else:
-            #draw a straigth line
+            #draw a straight line
             bpy.ops.mesh.primitive_cone_add(
                 radius1=0.009,
                 radius2=0.009,
@@ -87,6 +85,7 @@ class FOtools_OT_DeflectionCone(bpy.types.Operator):
             
         aim_object_to(deflectioncone, secondary_point)      
         self.set_origin(bpy.context.object,self.get_cone_top_vertex_coordinate())
+        deflectioncone.location = secondary_point.location
         return deflectioncone
 
     def get_vertex_world_coordinates(self, obj) -> List[Vector]:
@@ -95,7 +94,7 @@ class FOtools_OT_DeflectionCone(bpy.types.Operator):
         return world_coords
 
     def get_cone_top_vertex_coordinate(self) -> Vector:
-        # works only on a cone
+        #for a cone  the first vertex refers to the top coordinates
         active_selection = bpy.context.active_object
         cone_world_coordinates = self.get_vertex_world_coordinates(
             active_selection)
@@ -131,18 +130,17 @@ class FOtools_OT_DeflectionCone(bpy.types.Operator):
         intermediate_results = radius_cut(deflectioncone, min_distance, secondary_point)
         outside_min_radius_cone = intermediate_results[0]
         outside_min_radius_cone.name = f'Cone_outside_minimal_radius'
-        outside_min_radius_cone.data.materials[0] = fotools_materials[1]
+        outside_min_radius_cone.data.materials.append(fotools_materials[1])
         
         #outside maximal radius
         intermediate_results = radius_cut(intermediate_results[1], max_distance, secondary_point)
         outside_max_radius_cone = intermediate_results[1]
         outside_max_radius_cone.name = f'Cone_outside_max_radius'
-        outside_max_radius_cone.data.materials[0] = fotools_materials[1]
+        outside_max_radius_cone.data.materials.append(fotools_materials[1])
         
         #inside radius
         inside_min_max_radius_cone = intermediate_results[0]
         inside_min_max_radius_cone.name = f'Cone_inside_radius'
-        inside_min_max_radius_cone.data.materials[0] = fotools_materials[0]
-        #inside_min_max_radius_cone.active_material_index(1)
-        
+        inside_min_max_radius_cone.data.materials.append(fotools_materials[0])
+
         return {"FINISHED"}
