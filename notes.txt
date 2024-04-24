@@ -78,3 +78,111 @@ Here an example I made I use quite often: a Mesh Light
         # set activer material to your new material
         plane.active_material = material
         ---------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+#FILERBROWSER
+
+        '''
+#https://blender.stackexchange.com/questions/26898/how-to-create-a-folder-file-dialog
+import bpy
+
+from bpy.props import (StringProperty,
+                       PointerProperty,
+                       )
+                       
+from bpy.types import (Panel,
+                       PropertyGroup,
+                       )
+
+
+# ------------------------------------------------------------------------
+#    Scene Properties
+# ------------------------------------------------------------------------
+
+class MyProperties(PropertyGroup):
+
+    path: StringProperty(
+        name="",
+        description="Path to Directory",
+        default="",
+        maxlen=1024,
+        subtype='DIR_PATH')
+
+# ------------------------------------------------------------------------
+#    Panel in Object Mode
+# ------------------------------------------------------------------------
+
+class OBJECT_PT_CustomPanel(Panel):
+    bl_idname = "OBJECT_PT_my_panel"
+    bl_label = "My Panel"
+    bl_space_type = "VIEW_3D"   
+    bl_region_type = "UI"
+    bl_category = "Tools"
+    bl_context = "objectmode"
+
+    def draw(self, context):
+        layout = self.layout
+        scn = context.scene
+        col = layout.column(align=True)
+        col.prop(scn.my_tool, "path", text="")
+
+        # print the path to the console
+        print (scn.my_tool.path)
+
+# ------------------------------------------------------------------------
+#    Registration
+# ------------------------------------------------------------------------
+    
+classes = (
+    MyProperties,
+    OBJECT_PT_CustomPanel
+)
+
+def register():
+    from bpy.utils import register_class
+    for cls in classes:
+        register_class(cls)
+
+    bpy.types.Scene.my_tool = PointerProperty(type=MyProperties)
+
+def unregister():
+    from bpy.utils import unregister_class
+    for cls in reversed(classes):
+        unregister_class(cls)
+    del bpy.types.Scene.my_tool
+
+
+if __name__ == "__main__":
+    register()
+
+
+    '''
+
+
+
+        '''
+#https://blender.stackexchange.com/questions/26898/how-to-create-a-folder-file-dialog
+
+ import os
+
+# Path to the folder
+path = '/home/user/Desktop/'
+
+# Collect all OpenEXR files within the folder
+exr_list = [f for f in os.listdir(path) if f.endswith('.exr')] 
+
+# Iterate through the list
+for i in exr_list:
+    print(os.path.join(path,i))
+        '''

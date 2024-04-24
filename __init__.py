@@ -27,7 +27,7 @@ from . panels.impact_backprojection_panel import Backprojection_Panel
 from . operators.deflectioncone_operator import FOtools_OT_DeflectionCone
 from . panels.boolean_cutter_panel import Boolcut_Panel
 from . operators.bool_cut_operator import FOtools_OT_Bool_cut
-
+from .panels.geonode_pointcloud_pannel import Geonode_pointcloud_Panel
 
 bl_info = {
     "name": "FOtools",
@@ -42,11 +42,13 @@ bl_info = {
 
 
 classes = [
-    Backprojection_Panel, 
-    FOtools_OT_DeflectionCone, 
-    Boolcut_Panel, 
+
+    Backprojection_Panel,
+    FOtools_OT_DeflectionCone,
+    Boolcut_Panel,
     FOtools_OT_Bool_cut,
-    Field_of_view_Panel
+    Field_of_view_Panel,
+    Geonode_pointcloud_Panel
     ]
 
 
@@ -62,12 +64,14 @@ def unregister():
 
 if __name__ == "__main__":
     register()
-
-
+    
+# TODO: horizontalke en verticale camera fustrum tekenen (matty)
+# TODO: trajectory projection, add toggle  to foreward or back prohjection with toggle
+# TODO: resampling, voxel, spatial ?
+# TODO: add pointcloud geometrynodes
 # TODO: add logo and version to panel
 # TODO: custom icons
-# TODO: place humanoid male and female figure
-# TODO: find the standard addon license in the snippets file
+# TODO: place humanoid m/f figure
 # TODO: field of view highlighter/ /checker
 # TODO: add edge to mesh line function
 # TODO: selector for: back-projection, foreward-projection, both, line-between.
@@ -77,10 +81,8 @@ if __name__ == "__main__":
 # TODO: add a offset value for a perpendicular pivotpoint
 # TODO: basic pointcloud importer?
 # TODO: groundplane extractor ?
-# TODO: resampling, voxel, spatial ?
 # TODO: basic dicom importer
 # TODO: adjustable wedge tool
-# TODO: Cloudcompare achtige path animatie tool
 # TODO: click on plane and set an object with a give "height" allong the face normal
 # TODO: toggle radius cutter,
 # TODO: make cone and radius sphere density increas as the length grow longer.
@@ -89,11 +91,3 @@ if __name__ == "__main__":
 # TODO: implement color selector panel
 # TODO: mesh cleaning tools
 # TODO: REFACTOR CLEANUP out of bool_cut_operator
-# DONE: implement boolcut pannel
-# DONE: create red, yelow, blue materials on startup
-# DONE: assign materials to the cone  sections
-# DONE: Sync vertices of the uvsphere to  the vertices of the cone in the init script.
-# DONE: a 32*16 uv-sphere over 10M can have a deviation aprox. 10CM due to the polygonal structure of the curved surface
-# DONE: optimaliseer cutter segmenten tov cutee cone
-# DONE: its probably better to aim the cone after cleanup
-# DONE: cleanup expects the vertices to be exactly alligned.
