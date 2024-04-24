@@ -1,0 +1,80 @@
+- import  ply
+- creeer geometry node  mesh to points
+- creer smaterial
+- add attribute for color (Col) to shader
+- in geometry node editor, add add material to mesh node " set material" 
+
+
+-------
+# \create new geometrynode network
+bpy.ops.node.new_geometry_nodes_modifier()
+
+# create new mesh to point node
+bpy.ops.node.add_node(use_transform=True, type="GeometryNodeMeshToPoints")
+
+# connect mesh to point network to node network by dragging on the connectionline
+
+bpy.ops.node.translate_attach(TRANSFORM_OT_translate={"value":(-73.2606, -460.655, 0), "orient_type":'GLOBAL', "orient_matrix":((1, 0, 0), (0, 1, 0), (0, 0, 1)), "orient_matrix_type":'GLOBAL', "constraint_axis":(False, False, False), "mirror":False, "use_proportional_edit":False, "proportional_edit_falloff":'SMOOTH', "proportional_size":1, "use_proportional_connected":False, "use_proportional_projected":False, "snap":False, "snap_elements":{}, "use_snap_project":False, "snap_target":'CLOSEST', "use_snap_self":True, "use_snap_edit":True, "use_snap_nonedit":True, "use_snap_selectable":False, "snap_point":(0, 0, 0), "snap_align":False, "snap_normal":(0, 0, 0), "gpencil_strokes":False, "cursor_transform":False, "texture_space":False, "remove_on_cancel":False, "use_duplicated_keyframes":False, "view2d_edge_pan":True, "release_confirm":False, "use_accurate":False, "use_automerge_and_split":False}, NODE_OT_attach={})
+
+
+-------
+You can get the material node tree from bpy.data.materials['MyMaterial'].node_tree
+
+Then add the nodes with node_tree.nodes.new()
+
+For example, to add a diffuse shader node to MyMaterial and create MyMaterial if it doesn't exist:
+
+import bpy
+mat_name = "MyMaterial"
+# Test if material exists
+# If it does not exist, create it:
+mat = (bpy.data.materials.get(mat_name) or 
+       bpy.data.materials.new(mat_name))
+
+# Enable 'Use nodes':
+mat.use_nodes = True
+nodes = mat.node_tree.nodes
+
+# Add a diffuse shader and set its location:    
+node = nodes.new('ShaderNodeBsdfDiffuse')
+node.location = (100,100)
+------
+
+The answer provided is only partially helpful. Or it is outdated in 2.7
+
+Yes you have to add the nodes (use_nodes = True). However the default material is the Diffuse BSDF. So if you want to use this, fine, you're done. But to change the shader being used:
+
+Remove the shader in place (Diffuse BSDF, otherwise the second element in the material.node_tree.nodes.values() list. This is sort of optional, as it can also stay in place, but it's just not tidy and confusing to leave it there.
+Create a new shader node. e.g. material.node_tree.nodes.new('ShaderNodeEmission')
+Update the link to the Material Output node. material.node_tree.links.new(mat.inputs[0], node.outputs[0])
+Here an example I made I use quite often: a Mesh Light
+
+    def create_light():
+        """
+        Add a mesh light for cycles
+        """
+
+        # Add new plane
+        bpy.ops.mesh.primitive_plane_add(location=(15, -5, 5))
+        plane = bpy.context.active_object
+        plane.name = 'Light Plane'
+        plane.scale = mathutils.Vector((4, 4, 4))
+        # tilt
+        plane.rotation_euler.rotate_axis('Y', radians(40))
+
+        # Create a new material
+        material = bpy.data.materials.new(name="Plane Light Emission Shader")
+        material.use_nodes = True
+
+        # Remove default
+        material.node_tree.nodes.remove(material.node_tree.nodes.get('Diffuse BSDF'))
+        material_output = material.node_tree.nodes.get('Material Output')
+        emission = material.node_tree.nodes.new('ShaderNodeEmission')
+        emission.inputs['Strength'].default_value = 5.0
+
+        # link emission shader to material
+        material.node_tree.links.new(material_output.inputs[0], emission.outputs[0])
+
+        # set activer material to your new material
+        plane.active_material = material
+        ---------------

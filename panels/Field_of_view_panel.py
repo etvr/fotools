@@ -20,7 +20,7 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis
 import bpy
 
 class Field_of_view_Panel(bpy.types.Panel):
-    bl_label = "Field of view"
+    bl_label = "Field of view analysis"
     bl_idname = "ETVR_PT_FOtools_Field_of_view"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
