@@ -22,12 +22,13 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis
 
 import bpy
 
-from . panels.Field_of_view_panel import Field_of_view_Panel
-from . panels.impact_backprojection_panel import Backprojection_Panel
-from . operators.deflectioncone_operator import FOtools_OT_DeflectionCone
-from . panels.boolean_cutter_panel import Boolcut_Panel
-from . operators.bool_cut_operator import FOtools_OT_Bool_cut
+from .panels.Field_of_view_panel import Field_of_view_Panel
+from .panels.impact_backprojection_panel import Backprojection_Panel
+from .operators.deflectioncone_operator import FOtools_OT_DeflectionCone
+from .panels.boolean_cutter_panel import Boolcut_Panel
+from .operators.bool_cut_operator import FOtools_OT_Bool_cut
 from .panels.geonode_pointcloud_pannel import Geonode_pointcloud_Panel
+from .panels.protractor_pannel import Protractor_Pannel
 
 bl_info = {
     "name": "FOtools",
@@ -42,13 +43,13 @@ bl_info = {
 
 
 classes = [
-
     Backprojection_Panel,
     FOtools_OT_DeflectionCone,
     Boolcut_Panel,
     FOtools_OT_Bool_cut,
     Field_of_view_Panel,
-    Geonode_pointcloud_Panel
+    Geonode_pointcloud_Panel,
+    Protractor_Pannel
     ]
 
 
@@ -65,6 +66,7 @@ def unregister():
 if __name__ == "__main__":
     register()
     
+# TODO: eerste een tool waarmee een polygon word gemaakt met een opgegeven hoek op een van te voren bepaalde baseline
 # TODO: horizontalke en verticale camera fustrum tekenen (matty)
 # TODO: trajectory projection, add toggle  to foreward or back prohjection with toggle
 # TODO: resampling, voxel, spatial ?
