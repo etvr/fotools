@@ -19,16 +19,21 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis
 
 import bpy
 
-class Field_of_view_Panel(bpy.types.Panel):
-    bl_label = "protractor tools"
+class Protractor_Panel(bpy.types.Panel):
+    bl_label = "Protractor tool"
     bl_idname = "ETVR_PT_FO_protractor_tools"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_context = "objectmode"
     bl_category = "FOtools"
 
+    bpy.types.Scene.protractor_angle = bpy.props.FloatProperty( name="Angle Degree", description=" Angle for the to be drawn polygon", min=0, max=360, default=45,)
+
     def draw(self, context):
         layout = self.layout
         layout.use_property_split = True
-        row = layout.row()
-        row.label(text="Draws a polygon with a set angle at the origin")
+        ###
+        self.layout.prop(context.scene, "protractor_angle")
+        #self.layout.separator_spacer()
+        self.layout.operator("mesh.protractor_angle", text="Create Protractor Angle", icon="CONE")
+        ###

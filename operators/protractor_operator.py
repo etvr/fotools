@@ -17,13 +17,12 @@ Created by Alexander de Bruijn 2024
 FOtools: a set of blender tools to assist in 3D-Forensic analysis
 """
 import bpy
-from typing import List
-
+#from typing import List
 import math
 
 
 class FOtools_OT_Bool_cut(bpy.types.Operator):
-    bl_idname = "mesh.protractor"
+    bl_idname = "mesh.protractor_angle"
     bl_label = "FOtools create protractor"
     bl_description = (
         "creates an polytriangle with an set angle on the world origin point"
@@ -43,7 +42,8 @@ class FOtools_OT_Bool_cut(bpy.types.Operator):
     def operator(self, parmA, ParmB): 
         pass
     
-    def calculate_ triangle_coordinates(radius, angle) -> List[float, float]:
+    def calculate_triangle_coordinates(radius, angle): 
+      pass
         '''
                     c
                   /|

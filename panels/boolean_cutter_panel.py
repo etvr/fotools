@@ -20,6 +20,7 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis
 import bpy
 
 class Boolcut_Panel(bpy.types.Panel):
+    
     bl_label = "Slice Object"
     bl_idname = "ETVR_PT_FOtools_Bool_Cut"
     bl_space_type = "VIEW_3D"

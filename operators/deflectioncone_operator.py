@@ -19,6 +19,7 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis
 
 
 import bpy
+
 from math import tan, radians
 from mathutils import Vector, Matrix
 from typing import List
