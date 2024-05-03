@@ -27,53 +27,71 @@ calculates the coordinates of  the top vertex of the protractor angle with the g
   /-------|                 ----- = ----- = -----  
 a       C      b            	sin(a)    sin(b)   sin(c)
 """
-from typing import List
+#from typing import List
 import bpy
 from math import sin
 from mathutils import Vector
 
 class FOtools_OT_Protractor(bpy.types.Operator):
   
-    bl_idname = "mesh.protractor_angle"
-    bl_label = "FOtools create protractor"
-    bl_description = "creates an polytriangle with an set angle on the world origin point"
-    bl_options = {"UNDO"}
+  bl_idname = "mesh.protractor_angle"
+  bl_label = "FOtools create protractor"
+  bl_description = "creates a polytriangle with a set angle on the world origin"
+  bl_options = {"UNDO"}
 
-    @classmethod
-    def poll(cls, context):
-        return True
+  @classmethod
+  def poll(cls, context):
+    return True
 
-    def execute(self, context):
-      protractor_angle = bpy.context.scene.protractor_angle
-      protractor_radius = bpy.context.scene.protractor_radius
+  def execute(self, context):
+    protractor_angle = bpy.context.scene.vertical_protractor_angle
+    protractor_angle = bpy.context.scene.horizontal_protractor_angle
+    protractor_radius = bpy.context.scene.protractor_radius
   
-      protractor_mesh = self.draw_protractor(protractor_angle, protractor_radius )
-      return {"FINISHED"}
+    protractor_mesh = self.draw_protractor(vertical_protractor_angle, protractor_radius )
+    return {"FINISHED"}
     
     
-    def calculate_triangle_coordinates(self, angle_a: float, radius: float) -> Vector: 
-     # calculates the coordinates of  the top vertex of the protractor with the given corner 'a' on the origin.
-      angle_c = 90 - angle_a
-      length_A = sin(angle_a) * radius
-      length_C = sin(angle_c) * radius
-      return [length_C, length_A]
+  def calculate_triangle_coordinates(self, angle_a: float, radius: float) -> Vector: 
+    # calculates the coordinates of  the top vertex of the protractor with the given corner 'a' on the origin.
+    angle_c = 90 - angle_a
+    length_A = sin(angle_a) * radius
+    length_C = sin(angle_c) * radius
+    return [length_C, length_A]
     
     
-    def draw_protractor(self, angle, radius):
-      mesh = bpy.data.meshes.new("Triangle_Mesh")
-      protractor_name = f"hoek_{angle}"
+    # def draw_protractor(self, angle, radius):
+    #   mesh = bpy.data.meshes.new("Triangle_Mesh")
+    #   protractor_name = f"hoek_{angle}"
       
-      vertex_c_coordinates = self.calculate_triangle_coordinates(protractor_angle, protractor_radius)
+    #   vertex_c_coordinates = self.calculate_triangle_coordinates(protractor_angle, protractor_radius)
       
-      #creer mesh-object
-      obj = bpy.data.objects.new(protractor_name, mesh)
-      bpy.context.collection.objects.link(obj)
+    #   #creer mesh-object
+    #   obj = bpy.data.objects.new(protractor_name, mesh)
+    #   bpy.context.collection.objects.link(obj)
       
-      # define geometry data
-      faces = [(0, 1, 2)]
-      edges = []
-      verts = [(0, 0, 0), (0, vertex_c_coordinates[0], 0), (0,  vertex_c_coordinates[0],  vertex_c_coordinates[1])]
+    #   # define geometry data
+    #   faces = [(0, 1, 2)]
+    #   edges = []
+    #   verts = [(0, 0, 0), (0, vertex_c_coordinates[0], 0), (0,  vertex_c_coordinates[0],  vertex_c_coordinates[1])]
       
-      #draw geometry
-      mesh_data = mesh.from_pydata(verts, edges, faces)
-      mesh.update()
+    #   #draw geometry
+    #   mesh_data = mesh.from_pydata(verts, edges, faces)
+    #   mesh.update()
+
+
+  def draw_polygon(self, vertices_array, faces_array, name):
+    #creates a polygon shape based on an input of vertices and faces.
+    mesh = bpy.data.meshes.new("Triangle_Mesh")
+    obj = bpy.data.objects.new(name, mesh)
+    bpy.context.collection.objects.link(obj)
+    edges = []
+    mesh_data = mesh.from_pydata(vertices_array, edges, faces_array)
+    mesh.update()
+      
+  def draw_protractor(self, angle, radius):
+    vertex_c_coordinates = self.calculate_triangle_coordinates(angle, radius)
+    faces = [(0, 1, 2)] #numbers refer to the index of its vertex in the vert array
+    verts = [(0, 0, 0), (0, vertex_c_coordinates[0], 0), (0,  vertex_c_coordinates[0],  vertex_c_coordinates[1])]
+    protractor_name = f"Angle_{angle}"
+    draw_polygon(verts, faces, protractor_name)
