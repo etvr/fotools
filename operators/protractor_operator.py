@@ -15,18 +15,28 @@ Created by Alexander de Bruijn 2024
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 FOtools: a set of blender tools to assist in 3D-Forensic analysis
+
+
+calculates the coordinates of  the top vertex of the protractor angle with the given corner at the origin,
+              c                  given angle a 
+            /|                  vertex a = [0, 0] at the origin
+          /  |                  vertex c = [sin(90 - angle a)*radius, sin(angle a)*radius]
+        /    |                  vertex b = [vertex c[0], 0]
+    B/      |A
+    /        |                  A            B         C 
+  /-------|                 ----- = ----- = -----  
+a       C      b            	sin(a)    sin(b)   sin(c)
 """
+from typing import List
 import bpy
-#from typing import List
-import math
+from math import sin
+from mathutils import Vector
 
-
-class FOtools_OT_Bool_cut(bpy.types.Operator):
+class FOtools_OT_Protractor(bpy.types.Operator):
+  
     bl_idname = "mesh.protractor_angle"
     bl_label = "FOtools create protractor"
-    bl_description = (
-        "creates an polytriangle with an set angle on the world origin point"
-    )
+    bl_description = "creates an polytriangle with an set angle on the world origin point"
     bl_options = {"UNDO"}
 
     @classmethod
@@ -34,46 +44,36 @@ class FOtools_OT_Bool_cut(bpy.types.Operator):
         return True
 
     def execute(self, context):
-        parmA = "something"
-        parmB = "something else"
-        self.operator(parmA, parmB)
-        return {"FINISHED"}
-
-    def operator(self, parmA, ParmB): 
-        pass
-    
-    def calculate_triangle_coordinates(radius, angle): 
-      pass
-        '''
-                    c
-                  /|
-                /  |
-              /    |
-          B/      |A
-          /        |
-        /-------|
-    a       C      b       
-    
-                    68
-                  /|
-                /  |
-              /    |
-        1  /      | 0.3746
-          /        |
-        /-------|
-22  0.9272    90       
+      protractor_angle = bpy.context.scene.protractor_angle
+      protractor_radius = bpy.context.scene.protractor_radius
+  
+      protractor_mesh = self.draw_protractor(protractor_angle, protractor_radius )
+      return {"FINISHED"}
     
     
-        apply sine rule?
-        - radius can be assumed as 1 and scaled after drawing the polygon, apply transform afterward. this way we can skip a multiplication
-       
-        so givn  that 
-        B = : "radius" ex: 1
-        b = 90 deg'
-        a = "angle" a set function argument ex: 22
-        
-        then 
-        c = (180 - b - a)
-        A = math.sin( a ) * B
-        C = math.sine( c ) * B
-        ''
+    def calculate_triangle_coordinates(self, angle_a: float, radius: float) -> Vector: 
+     # calculates the coordinates of  the top vertex of the protractor with the given corner 'a' on the origin.
+      angle_c = 90 - angle_a
+      length_A = sin(angle_a) * radius
+      length_C = sin(angle_c) * radius
+      return [length_C, length_A]
+    
+    
+    def draw_protractor(self, angle, radius):
+      mesh = bpy.data.meshes.new("Triangle_Mesh")
+      protractor_name = f"hoek_{angle}"
+      
+      vertex_c_coordinates = self.calculate_triangle_coordinates(protractor_angle, protractor_radius)
+      
+      #creer mesh-object
+      obj = bpy.data.objects.new(protractor_name, mesh)
+      bpy.context.collection.objects.link(obj)
+      
+      # define geometry data
+      faces = [(0, 1, 2)]
+      edges = []
+      verts = [(0, 0, 0), (0, vertex_c_coordinates[0], 0), (0,  vertex_c_coordinates[0],  vertex_c_coordinates[1])]
+      
+      #draw geometry
+      mesh_data = mesh.from_pydata(verts, edges, faces)
+      mesh.update()

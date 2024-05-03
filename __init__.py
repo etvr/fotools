@@ -29,6 +29,7 @@ from .panels.boolean_cutter_panel import Boolcut_Panel
 from .operators.bool_cut_operator import FOtools_OT_Bool_cut
 from .panels.geonode_pointcloud_pannel import Geonode_pointcloud_Panel
 from .panels.protractor_panel import Protractor_Panel
+from.operators.protractor_operator import FOtools_OT_Protractor
 
 bl_info = {
     "name": "FOtools",
@@ -49,7 +50,8 @@ classes = [
     FOtools_OT_Bool_cut,
     Field_of_view_Panel,
     Geonode_pointcloud_Panel,
-    Protractor_Panel
+    Protractor_Panel,
+    FOtools_OT_Protractor
     ]
 
 
