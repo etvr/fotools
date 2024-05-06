@@ -27,9 +27,9 @@ class Protractor_Panel(bpy.types.Panel):
     bl_context = "objectmode"
     bl_category = "FOtools"
 
-    bpy.types.Scene.protractor_angle = bpy.props.FloatProperty( name="Vertical Angle", description=" Angle for the vertical angle polygon", min=0, max=360, default=45,)
-    bpy.types.Scene.protractor_angle = bpy.props.FloatProperty( name="Horizontal Angle", description=" Angle for the horizontal angle polygon", min=0, max=360, default=45,)
-    bpy.types.Scene.protractor_radius = bpy.props.FloatProperty( name="Protractor Radius", description=" Radius of the drawn polygon", min=0, max=100, default=1,)
+    bpy.types.Scene.vertical_protractor_angle = bpy.props.FloatProperty( name="Vertical Angle", description=" Angle for the vertical angle polygon", min=0.0, max=360.0, default=44.0,)
+    bpy.types.Scene.horizontal_protractor_angle = bpy.props.FloatProperty( name="Horizontal Angle", description=" Angle for the horizontal angle polygon", min=0.0, max=360.0, default=44.0,)
+    bpy.types.Scene.protractor_radius = bpy.props.FloatProperty( name="Radius", description=" Radius of the drawn polygon", min=0.0, max=100.0, default=1.0,)
 
     def draw(self, context):
         layout = self.layout
@@ -37,5 +37,5 @@ class Protractor_Panel(bpy.types.Panel):
 
         self.layout.prop(context.scene, "vertical_protractor_angle")
         self.layout.prop(context.scene, "horizontal_protractor_angle")
-        self.layout.prop(context.scene, "protracor_radius")
+        self.layout.prop(context.scene, "protractor_radius")
         self.layout.operator("mesh.protractor_angle", text="Create Protractor Angle", icon="CONE")

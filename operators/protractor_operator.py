@@ -29,7 +29,7 @@ a       C      b            	sin(a)    sin(b)   sin(c)
 """
 #from typing import List
 import bpy
-from math import sin
+from math import sin, radians
 from mathutils import Vector
 
 class FOtools_OT_Protractor(bpy.types.Operator):
@@ -44,40 +44,23 @@ class FOtools_OT_Protractor(bpy.types.Operator):
     return True
 
   def execute(self, context):
-    protractor_angle = bpy.context.scene.vertical_protractor_angle
-    protractor_angle = bpy.context.scene.horizontal_protractor_angle
+    vertical_protractor_angle = bpy.context.scene.vertical_protractor_angle
+    horizontal_protractor_angle = bpy.context.scene.horizontal_protractor_angle
     protractor_radius = bpy.context.scene.protractor_radius
   
-    protractor_mesh = self.draw_protractor(vertical_protractor_angle, protractor_radius )
+    protractor_horizontal_mesh = self.draw_horizontal_protractor(horizontal_protractor_angle, protractor_radius )
+    protractor_vertical_mesh = self.draw_vertical_protractor(vertical_protractor_angle, protractor_radius )
+    frustum_mesh = self.draw_frustum(horizontal_protractor_angle, vertical_protractor_angle, protractor_radius)
+
     return {"FINISHED"}
-    
-    
-  def calculate_triangle_coordinates(self, angle_a: float, radius: float) -> Vector: 
+
+  def calculate_triangle_coordinates(self, angle_a: float, radius: float):
     # calculates the coordinates of  the top vertex of the protractor with the given corner 'a' on the origin.
-    angle_c = 90 - angle_a
-    length_A = sin(angle_a) * radius
-    length_C = sin(angle_c) * radius
+    angle_c = 90.0 - (angle_a / 2.0)
+    length_A = sin(radians(angle_a / 2.0))
+    length_C = sin(radians(angle_c)) 
+    #print (f"{length_C=}, {length_A=}, {angle_a=}, {radius=}")
     return [length_C, length_A]
-    
-    
-    # def draw_protractor(self, angle, radius):
-    #   mesh = bpy.data.meshes.new("Triangle_Mesh")
-    #   protractor_name = f"hoek_{angle}"
-      
-    #   vertex_c_coordinates = self.calculate_triangle_coordinates(protractor_angle, protractor_radius)
-      
-    #   #creer mesh-object
-    #   obj = bpy.data.objects.new(protractor_name, mesh)
-    #   bpy.context.collection.objects.link(obj)
-      
-    #   # define geometry data
-    #   faces = [(0, 1, 2)]
-    #   edges = []
-    #   verts = [(0, 0, 0), (0, vertex_c_coordinates[0], 0), (0,  vertex_c_coordinates[0],  vertex_c_coordinates[1])]
-      
-    #   #draw geometry
-    #   mesh_data = mesh.from_pydata(verts, edges, faces)
-    #   mesh.update()
 
 
   def draw_polygon(self, vertices_array, faces_array, name):
@@ -88,10 +71,36 @@ class FOtools_OT_Protractor(bpy.types.Operator):
     edges = []
     mesh_data = mesh.from_pydata(vertices_array, edges, faces_array)
     mesh.update()
-      
-  def draw_protractor(self, angle, radius):
-    vertex_c_coordinates = self.calculate_triangle_coordinates(angle, radius)
+    return obj
+        
+        
+  def draw_horizontal_protractor(self, angle, radius):
+    vertex_c = self.calculate_triangle_coordinates(angle, radius)
     faces = [(0, 1, 2)] #numbers refer to the index of its vertex in the vert array
-    verts = [(0, 0, 0), (0, vertex_c_coordinates[0], 0), (0,  vertex_c_coordinates[0],  vertex_c_coordinates[1])]
+    verts = [(0, 0, 0), (vertex_c[0], (vertex_c[1] * -1), 0), (vertex_c[0], vertex_c[1] , 0)]
     protractor_name = f"Angle_{angle}"
-    draw_polygon(verts, faces, protractor_name)
+    obj = self.draw_polygon(verts, faces, protractor_name)
+    return obj
+  
+  def draw_vertical_protractor(self, angle, radius):
+    vertex_c = self.calculate_triangle_coordinates(angle, radius)
+    faces = [(0, 1, 2)] #numbers refer to the index of its vertex in the vert array
+    verts = [(0, 0, 0), (vertex_c[0], 0, (vertex_c[1] * -1)), (vertex_c[0], 0,vertex_c[1])]
+    protractor_name = f"Angle_{angle}"
+    obj = self.draw_polygon(verts, faces, protractor_name)
+    return obj
+  
+  
+  def draw_frustum(self, h_angle, v_angle, radius):
+    h_coord  = self.calculate_triangle_coordinates(v_angle, radius)
+    v_coord  = self.calculate_triangle_coordinates(h_angle, radius)
+    # define coordinates array
+    verts = [(0, 0, 0), 
+             (v_coord[0], v_coord[1]*-1, h_coord[1] ), 
+             (v_coord[0], v_coord[1]*-1, h_coord[1] * -1), 
+             (v_coord[0], v_coord[1], h_coord[1] * -1), 
+             (v_coord[0], v_coord[1], h_coord[1])]
+    faces = [(0, 1, 4), (0, 4, 3), (0, 3, 2), (0, 1, 2)] 
+    frustum_name = f"Frustum_{h_angle}_x_{v_angle}"
+    obj = self.draw_polygon(verts, faces, frustum_name)  
+    return obj
