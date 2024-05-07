@@ -35,7 +35,7 @@ class FOtools_OT_Protractor(bpy.types.Operator):
   
   
   bl_idname = "mesh.protractor_angle"
-  bl_label = "FOtools create protractor"
+  bl_label = "FOtools draw protractor angle"
   bl_description = "creates a polytriangle with a set angle on the world origin"
   bl_options = {"UNDO"}
 
@@ -49,9 +49,9 @@ class FOtools_OT_Protractor(bpy.types.Operator):
     vertical_protractor_angle = bpy.context.scene.vertical_protractor_angle
     horizontal_protractor_angle = bpy.context.scene.horizontal_protractor_angle
     protractor_radius = bpy.context.scene.protractor_radius
+    print(f"{horizontal_protractor_angle=} {protractor_radius=}")
     protractor_horizontal_mesh = self.draw_horizontal_protractor(horizontal_protractor_angle, protractor_radius )
     protractor_vertical_mesh = self.draw_vertical_protractor(vertical_protractor_angle, protractor_radius )
-    frustum_mesh = self.draw_frustum(horizontal_protractor_angle, vertical_protractor_angle, protractor_radius)
     return {"FINISHED"}
 
 
@@ -76,6 +76,7 @@ class FOtools_OT_Protractor(bpy.types.Operator):
         
         
   def draw_horizontal_protractor(self, angle, radius):
+    print(f" test{angle=} {radius=}")
     vertex_c = calculate_triangle_coordinates(angle, radius)
     faces = [(0, 1, 2)] #numbers refer to the index of its vertex in the vert array
     verts = [(0, 0, 0), (vertex_c[0], (vertex_c[1] * -1), 0), (vertex_c[0], vertex_c[1] , 0)]
@@ -93,19 +94,19 @@ class FOtools_OT_Protractor(bpy.types.Operator):
     return obj
   
   
-  def draw_frustum(self, h_angle, v_angle, radius):
-    h_coord  = calculate_triangle_coordinates(v_angle, radius)
-    v_coord  = calculate_triangle_coordinates(h_angle,   radius)
-    scalefactor = (h_coord[0] / v_coord[0]) 
-    v_coord = (v_coord[0] * scalefactor, v_coord[1] * scalefactor)
-    # define coordinates arra
-    verts = [(0, 0, 0), 
-             (h_coord[0], v_coord[1]*-1, h_coord[1] ), 
-             (h_coord[0], v_coord[1]*-1, h_coord[1] * -1), 
-             (h_coord[0], v_coord[1], h_coord[1] * -1), 
-             (h_coord[0], v_coord[1], h_coord[1])]
-    faces = [(0, 1, 4), (0, 4, 3), (0, 3, 2), (0, 1, 2)] 
-    frustum_name = f"Frustum_{h_angle}_x_{v_angle}"
-    obj = draw_polygon(verts, faces, frustum_name)  
-    return obj
+  # def draw_frustum(self, h_angle, v_angle, radius):
+  #   h_coord  = calculate_triangle_coordinates(v_angle, radius)
+  #   v_coord  = calculate_triangle_coordinates(h_angle,   radius)
+  #   scalefactor = (h_coord[0] / v_coord[0]) 
+  #   v_coord = (v_coord[0] * scalefactor, v_coord[1] * scalefactor)
+  #   # define coordinates arra
+  #   verts = [(0, 0, 0), 
+  #            (h_coord[0], v_coord[1]*-1, h_coord[1] ), 
+  #            (h_coord[0], v_coord[1]*-1, h_coord[1] * -1), 
+  #            (h_coord[0], v_coord[1], h_coord[1] * -1), 
+  #            (h_coord[0], v_coord[1], h_coord[1])]
+  #   faces = [(0, 1, 4), (0, 4, 3), (0, 3, 2), (0, 1, 2)] 
+  #   frustum_name = f"Frustum_{h_angle}_x_{v_angle}"
+  #   obj = draw_polygon(verts, faces, frustum_name)  
+  #   return obj
   

@@ -39,3 +39,4 @@ class Protractor_Panel(bpy.types.Panel):
         self.layout.prop(context.scene, "horizontal_protractor_angle")
         self.layout.prop(context.scene, "protractor_radius")
         self.layout.operator("mesh.protractor_angle", text="Create Angle", icon="CONE")
+        self.layout.operator("mesh.draw_frustum", text="Create Frustum", icon="CONE")
