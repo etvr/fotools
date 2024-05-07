@@ -29,9 +29,6 @@ a       C      b            	sin(a)    sin(b)   sin(c)
 """
 #from typing import List
 import bpy
-from math import sin, radians, hypot
-from mathutils import Vector
-
 from ..utils.protractor_helpers import calculate_triangle_coordinates, draw_polygon
 
 class FOtools_OT_Protractor(bpy.types.Operator):
@@ -79,26 +76,26 @@ class FOtools_OT_Protractor(bpy.types.Operator):
         
         
   def draw_horizontal_protractor(self, angle, radius):
-    vertex_c = self.calculate_triangle_coordinates(angle, radius)
+    vertex_c = calculate_triangle_coordinates(angle, radius)
     faces = [(0, 1, 2)] #numbers refer to the index of its vertex in the vert array
     verts = [(0, 0, 0), (vertex_c[0], (vertex_c[1] * -1), 0), (vertex_c[0], vertex_c[1] , 0)]
     protractor_name = f"Angle_{angle}"
-    obj = self.draw_polygon(verts, faces, protractor_name)
+    obj = draw_polygon(verts, faces, protractor_name)
     return obj
   
   
   def draw_vertical_protractor(self, angle, radius):
-    vertex_c = self.calculate_triangle_coordinates(angle, radius)
+    vertex_c = calculate_triangle_coordinates(angle, radius)
     faces = [(0, 1, 2)] #numbers refer to the index of its vertex in the vert array
     verts = [(0, 0, 0), (vertex_c[0], 0, (vertex_c[1] * -1)), (vertex_c[0], 0,vertex_c[1])]
     protractor_name = f"Angle_{angle}"
-    obj = self.draw_polygon(verts, faces, protractor_name)
+    obj = draw_polygon(verts, faces, protractor_name)
     return obj
   
   
   def draw_frustum(self, h_angle, v_angle, radius):
-    h_coord  = self.calculate_triangle_coordinates(v_angle, radius)
-    v_coord  = self.calculate_triangle_coordinates(h_angle,   radius)
+    h_coord  = calculate_triangle_coordinates(v_angle, radius)
+    v_coord  = calculate_triangle_coordinates(h_angle,   radius)
     scalefactor = (h_coord[0] / v_coord[0]) 
     v_coord = (v_coord[0] * scalefactor, v_coord[1] * scalefactor)
     # define coordinates arra
@@ -109,6 +106,6 @@ class FOtools_OT_Protractor(bpy.types.Operator):
              (h_coord[0], v_coord[1], h_coord[1])]
     faces = [(0, 1, 4), (0, 4, 3), (0, 3, 2), (0, 1, 2)] 
     frustum_name = f"Frustum_{h_angle}_x_{v_angle}"
-    obj = self.draw_polygon(verts, faces, frustum_name)  
+    obj = draw_polygon(verts, faces, frustum_name)  
     return obj
   
