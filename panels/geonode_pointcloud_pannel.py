@@ -17,27 +17,17 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 
 import bpy
 
-class Boolcut_Panel(bpy.types.Panel):
-    
-    bl_label = "Slice Object"
-    bl_idname = "ETVR_PT_FOtools_Bool_Cut"
+class Geonode_pointcloud_Panel(bpy.types.Panel):
+    bl_label = "Load pointcloud as geonodes"
+    bl_idname = "ETVR_PT_FOtools_geonode_pointcloud"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_context = "objectmode"
     bl_category ="FOtools"
-
-    bpy.types.Scene.to_be_cut = bpy.props.PointerProperty(type=bpy.types.Object)
-    bpy.types.Scene.knife_object = bpy.props.PointerProperty(type=bpy.types.Object)
-
+    
     def draw(self, context):
         layout = self.layout
         layout.use_property_split = True
         row = layout.row()
-        row.label(text="Select two mesh objects")
-        row = layout.row()
-        row.prop_search(context.scene, "to_be_cut", context.scene, "objects", text="Object to be cut" )
-        row = layout.row()
-        row.prop_search( context.scene, "knife_object", context.scene, "objects", text="Cutter Object", )
-        row.separator_spacer()
-        row = layout.row()
-        row.operator("mesh.bool_cut", text="Cut Object", icon="ORPHAN_DATA" )
+        row.label(text="Load a pointcloud as Geonodes")
+

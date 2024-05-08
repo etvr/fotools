@@ -1,0 +1,429 @@
+- import  ply
+- creeer geometry node  mesh to points
+- creer smaterial
+- add attribute for color (Col) to shader
+- in geometry node editor, add add material to mesh node " set material" 
+
+
+-------
+# \create new geometrynode network
+bpy.ops.node.new_geometry_nodes_modifier()
+
+# create new mesh to point node
+bpy.ops.node.add_node(use_transform=True, type="GeometryNodeMeshToPoints")
+
+# connect mesh to point network to node network by dragging on the connectionline
+
+bpy.ops.node.translate_attach(TRANSFORM_OT_translate={"value":(-73.2606, -460.655, 0), "orient_type":'GLOBAL', "orient_matrix":((1, 0, 0), (0, 1, 0), (0, 0, 1)), "orient_matrix_type":'GLOBAL', "constraint_axis":(False, False, False), "mirror":False, "use_proportional_edit":False, "proportional_edit_falloff":'SMOOTH', "proportional_size":1, "use_proportional_connected":False, "use_proportional_projected":False, "snap":False, "snap_elements":{}, "use_snap_project":False, "snap_target":'CLOSEST', "use_snap_self":True, "use_snap_edit":True, "use_snap_nonedit":True, "use_snap_selectable":False, "snap_point":(0, 0, 0), "snap_align":False, "snap_normal":(0, 0, 0), "gpencil_strokes":False, "cursor_transform":False, "texture_space":False, "remove_on_cancel":False, "use_duplicated_keyframes":False, "view2d_edge_pan":True, "release_confirm":False, "use_accurate":False, "use_automerge_and_split":False}, NODE_OT_attach={})
+
+
+-------
+You can get the material node tree from bpy.data.materials['MyMaterial'].node_tree
+
+Then add the nodes with node_tree.nodes.new()
+
+For example, to add a diffuse shader node to MyMaterial and create MyMaterial if it doesn't exist:
+
+import bpy
+mat_name = "MyMaterial"
+# Test if material exists
+# If it does not exist, create it:
+mat = (bpy.data.materials.get(mat_name) or 
+       bpy.data.materials.new(mat_name))
+
+# Enable 'Use nodes':
+mat.use_nodes = True
+nodes = mat.node_tree.nodes
+
+# Add a diffuse shader and set its location:    
+node = nodes.new('ShaderNodeBsdfDiffuse')
+node.location = (100,100)
+------
+
+The answer provided is only partially helpful. Or it is outdated in 2.7
+
+Yes you have to add the nodes (use_nodes = True). However the default material is the Diffuse BSDF. So if you want to use this, fine, you're done. But to change the shader being used:
+
+Remove the shader in place (Diffuse BSDF, otherwise the second element in the material.node_tree.nodes.values() list. This is sort of optional, as it can also stay in place, but it's just not tidy and confusing to leave it there.
+Create a new shader node. e.g. material.node_tree.nodes.new('ShaderNodeEmission')
+Update the link to the Material Output node. material.node_tree.links.new(mat.inputs[0], node.outputs[0])
+Here an example I made I use quite often: a Mesh Light
+
+    def create_light():
+        """
+        Add a mesh light for cycles
+        """
+
+        # Add new plane
+        bpy.ops.mesh.primitive_plane_add(location=(15, -5, 5))
+        plane = bpy.context.active_object
+        plane.name = 'Light Plane'
+        plane.scale = mathutils.Vector((4, 4, 4))
+        # tilt
+        plane.rotation_euler.rotate_axis('Y', radians(40))
+
+        # Create a new material
+        material = bpy.data.materials.new(name="Plane Light Emission Shader")
+        material.use_nodes = True
+
+        # Remove default
+        material.node_tree.nodes.remove(material.node_tree.nodes.get('Diffuse BSDF'))
+        material_output = material.node_tree.nodes.get('Material Output')
+        emission = material.node_tree.nodes.new('ShaderNodeEmission')
+        emission.inputs['Strength'].default_value = 5.0
+
+        # link emission shader to material
+        material.node_tree.links.new(material_output.inputs[0], emission.outputs[0])
+
+        # set activer material to your new material
+        plane.active_material = material
+        ---------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+#FILERBROWSER
+
+        '''
+#https://blender.stackexchange.com/questions/26898/how-to-create-a-folder-file-dialog
+import bpy
+
+from bpy.props import (StringProperty,
+                       PointerProperty,
+                       )
+                       
+from bpy.types import (Panel,
+                       PropertyGroup,
+                       )
+
+
+# ------------------------------------------------------------------------
+#    Scene Properties
+# ------------------------------------------------------------------------
+
+class MyProperties(PropertyGroup):
+
+    path: StringProperty(
+        name="",
+        description="Path to Directory",
+        default="",
+        maxlen=1024,
+        subtype='DIR_PATH')
+
+# ------------------------------------------------------------------------
+#    Panel in Object Mode
+# ------------------------------------------------------------------------
+
+class OBJECT_PT_CustomPanel(Panel):
+    bl_idname = "OBJECT_PT_my_panel"
+    bl_label = "My Panel"
+    bl_space_type = "VIEW_3D"   
+    bl_region_type = "UI"
+    bl_category = "Tools"
+    bl_context = "objectmode"
+
+    def draw(self, context):
+        layout = self.layout
+        scn = context.scene
+        col = layout.column(align=True)
+        col.prop(scn.my_tool, "path", text="")
+
+        # print the path to the console
+        print (scn.my_tool.path)
+
+# ------------------------------------------------------------------------
+#    Registration
+# ------------------------------------------------------------------------
+    
+classes = (
+    MyProperties,
+    OBJECT_PT_CustomPanel
+)
+
+def register():
+    from bpy.utils import register_class
+    for cls in classes:
+        register_class(cls)
+
+    bpy.types.Scene.my_tool = PointerProperty(type=MyProperties)
+
+def unregister():
+    from bpy.utils import unregister_class
+    for cls in reversed(classes):
+        unregister_class(cls)
+    del bpy.types.Scene.my_tool
+
+
+if __name__ == "__main__":
+    register()
+
+
+    '''
+
+
+
+        '''
+#https://blender.stackexchange.com/questions/26898/how-to-create-a-folder-file-dialog
+
+ import os
+
+# Path to the folder
+path = '/home/user/Desktop/'
+
+# Collect all OpenEXR files within the folder
+exr_list = [f for f in os.listdir(path) if f.endswith('.exr')] 
+
+# Iterate through the list
+for i in exr_list:
+    print(os.path.join(path,i))
+        '''
+
+        ########################################################################
+        create meshes??###########################################################
+        #######################################################################
+        # via https://devtalk.blender.org/t/alternative-in-2-80-to-create-meshes-from-python-using-the-tessfaces-api/7445/3
+
+# Example of creating a polygonal mesh in Python from numpy arrays
+# Note: this is Python 3.x code
+#
+# $ blender -P create_mesh.py
+#
+# See this link for more information on this part of the API:
+# https://docs.blender.org/api/blender2.8/bpy.types.Mesh.html
+#
+# Paul Melis (paul.melis@surfsara.nl), SURFsara, 24-05-2019
+import bpy
+import numpy
+
+# Note: we DELETE all objects in the scene and only then create the new mesh!
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete()
+
+# Vertices and edges (straightforward)
+
+vertices = numpy.array([
+    0, 0, 0,
+    2, 0, 0,
+    2, 2, 0.2,
+    0, 2, 0.2,
+    1, 3, 1,
+    1, -1, -1,
+    0, -2, -1,
+    2, -2, -1
+], dtype=numpy.float32)
+
+# Setting edges is optional, as they get created automatically for
+# any provided polygons. However, if you need edges that exist separately
+# from polygons then use this array.
+# XXX these edges only seem to show up after going in-and-out of edit mode.
+edges = numpy.array([
+    5, 6,
+    6, 7,
+    5, 7
+], dtype=numpy.int32)
+
+num_vertices = vertices.shape[0] // 3
+num_edges = edges.shape[0] // 2
+
+# Polygons are defined in loops. Here, we define one quad and two triangles
+
+vertex_index = numpy.array([
+    0, 1, 2, 3,
+    4, 3, 2,
+    0, 5, 1
+], dtype=numpy.int32)
+
+# For each polygon the start of its vertex indices in the vertex_index array
+loop_start = numpy.array([
+    0, 4, 7
+], dtype=numpy.int32)
+
+# Length of each polygon in number of vertices
+loop_total = numpy.array([
+    4, 3, 3
+], dtype=numpy.int32)
+
+num_vertex_indices = vertex_index.shape[0]
+num_loops = loop_start.shape[0]
+
+# Texture coordinates per vertex *per polygon loop*.
+uv_coordinates = numpy.array([
+    0, 0,
+    1, 0,
+    1, 1,
+    0, 1,
+
+    0.5, 1,
+    0, 0,
+    1, 0,
+
+    0, 1,
+    0.5, 0,
+    1, 1
+], dtype=numpy.float32)
+
+# Vertex color per vertex *per polygon loop*
+vertex_colors = numpy.array([
+    1, 0, 0,
+    1, 0, 0,
+    1, 0, 0,
+    1, 0, 0,
+
+    0, 1, 0,
+    0, 1, 0,
+    0, 1, 0,
+
+    1, 0, 0,
+    0, 1, 0,
+    0, 0, 1
+], dtype=numpy.float32)
+
+assert uv_coordinates.shape[0] == 2*vertex_index.shape[0]
+assert vertex_colors.shape[0] == 3*vertex_index.shape[0]
+
+# Create mesh object based on the arrays above
+
+mesh = bpy.data.meshes.new(name='created mesh')
+
+mesh.vertices.add(num_vertices)
+mesh.vertices.foreach_set("co", vertices)
+
+mesh.edges.add(num_edges)
+mesh.edges.foreach_set("vertices", edges)
+
+mesh.loops.add(num_vertex_indices)
+mesh.loops.foreach_set("vertex_index", vertex_index)
+
+mesh.polygons.add(num_loops)
+mesh.polygons.foreach_set("loop_start", loop_start)
+mesh.polygons.foreach_set("loop_total", loop_total)
+
+# Create UV coordinate layer and set values
+uv_layer = mesh.uv_layers.new()
+for i, uv in enumerate(uv_layer.data):
+    uv.uv = uv_coordinates[2*i:2*i+2]
+
+# Create vertex color layer and set values
+vcol_lay = mesh.vertex_colors.new()
+for i, col in enumerate(vcol_lay.data):
+    col.color[0] = vertex_colors[3*i+0]
+    col.color[1] = vertex_colors[3*i+1]
+    col.color[2] = vertex_colors[3*i+2]
+    col.color[3] = 1.0                     # Alpha?
+
+# We're done setting up the mesh values, update mesh object and
+# let Blender do some checks on it
+mesh.update()
+mesh.validate()
+
+# Create Object whose Object Data is our new mesh
+obj = bpy.data.objects.new('created object', mesh)
+
+# Add *Object* to the scene, not the mesh
+scene = bpy.context.scene
+scene.collection.objects.link(obj)
+
+# Select the new object and make it active
+bpy.ops.object.select_all(action='DESELECT')
+obj.select_set(True)
+bpy.context.view_layer.objects.active = obj
+
+#################################################################################
+#################################################################################
+#################################################################################
+import bpy, bmesh
+
+verts = ((0, 3), (2.5, 0.5), (5, 1), (4.5, 3.5), (10.5, 2), (8, 10), (7, 4.5), (2, 6))
+
+bm = bmesh.new()
+for v in verts:
+    bm.verts.new((v[0], v[1], 0))
+bm.faces.new(bm.verts)
+
+bm.normal_update()
+
+me = bpy.data.meshes.new("")
+bm.to_mesh(me)
+
+ob = bpy.data.objects.new("", me)
+bpy.context.scene.objects.link(ob)
+bpy.context.scene.update()
+
+############################################################################
+#############################WORKS!#########################################
+
+import bpy
+
+# Create a new mesh
+mesh = bpy.data.meshes.new("Triangle_Mesh")
+
+# Create a new object associated with the mesh
+obj = bpy.data.objects.new("Triangle", mesh)
+
+# Add the object to the current scene
+bpy.context.collection.objects.link(obj)
+
+faces = [(0, 1, 2)]
+edges = []
+verts = [(0, 0, 0), (0, 0, 1), (0, 1, 0)]
+# Create mesh data
+mesh_data = mesh.from_pydata(verts, edges, faces)
+
+# Update mesh with newly created data
+mesh.update()
+
+################################################################################
+##################################   or   #########################################
+################################################################################
+
+def add_object(self, context):
+    scale_x = self.scale.x
+    scale_y = self.scale.y
+
+    verts = [Vector((-1 * scale_x, 1 * scale_y, 0)),
+             Vector((1 * scale_x, 1 * scale_y, 0)),
+             Vector((1 * scale_x, -1 * scale_y, 0)),
+             Vector((-1 * scale_x, -1 * scale_y, 0)),
+            ]
+
+    edges = []
+    faces = [[0, 1, 2, 3]]
+
+    mesh = bpy.data.meshes.new(name="New Object Mesh")
+    mesh.from_pydata(verts, edges, faces)
+    # useful for development when the mesh may be invalid.
+    # mesh.validate(verbose=True)
+    object_data_add(context, mesh, operator=self)
+
+#################################################################
+#######################        CUBE      ###############################
+#################################################################
+
+import bpy
+
+
+mesh = bpy.data.meshes.new("Triangle_Mesh")
+obj = bpy.data.objects.new("Triangle", mesh)
+bpy.context.collection.objects.link(obj)
+
+
+faces = [ (0,1,5,4), (0,1,2,3), (3,2,6,7), (5,4,7,6), (4,0,3,7), (1,5,6,2)]
+edges = []
+verts = [(0, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0), (0, 0, 1), (1, 0, 1), (1, 1, 1), (0, 1, 1) ]
+
+
+mesh_data = mesh.from_pydata(verts, edges, faces)
+mesh.update()
+
+#################################################################
+#################################################################
+#################################################################
