@@ -7,9 +7,9 @@ GNU General Public License for more details.
 
 ## WARNING, assume that all results of these tools are WRONG! 
 these tools make large rounding errors and the calculations are questionable at best.
-YOU as the analyst make your own findings based on your knoledge and insight in your specific field of expertise, not the tool.
-these tools might assist you but their results are annything but conclusive. 
-use at your own risk, we accept no responibillity whatsoever for any results, sucesses, mistakes, damages or harm in any form that result in your use of this code.
+YOU as the analyst make your own findings based on your knowledge and insight, not the tool.
+these tools might assist you but their results are annything but conclusive so use at your own risk.
+We accept no responibillity whatsoever for any results, sucesses, mistakes, damages or harm in any form that might result in your use of this code.
 
  ### it contains a utilities for:
 
