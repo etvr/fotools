@@ -1,64 +1,43 @@
-import bpy
+
+# TODO: redesign h and v angle polygon fuctions such that the have the same radius as measured over the center length
+# TODO: REFACTOR horizontal and vertical angel functions to single function in wichbthe h and v are passed as an array
+# TODO: REFACTOR CLEANUP out of bool_cut_operator
+# TODO: eerste een tool waarmee een polygon word gemaakt met een opgegeven hoek op een van te voren bepaalde baseline
+# TODO: horizontalke en verticale camera fustrum tekenen (matty)
+# TODO: trajectory projection, add toggle  to foreward or back prohjection with toggle
+# TODO: resampling, voxel, spatial ?
+# TODO: add pointcloud geometrynodes
+# TODO: add logo and version to panel
+# TODO: custom icons
+# TODO: place humanoid m/f figure
+# TODO: field of view highlighter/ /checker
+# TODO: add edge to mesh line function
+# TODO: selector for: back-projection, foreward-projection, both, line-between.
+# TODO: if the angle ==0, draw a 9mm cylinder or a cone with a 1st and 2nd radius that is 9mm
+# TODO: ricochet lijn tool met verstelbare mirror lijn
+# TODO: the impactpoint radius is now a point, this is not realistic, van be fixed my pulling impact pivot back towards a given cone radius
+# TODO: add a offset value for a perpendicular pivotpoint
+# TODO: basic pointcloud importer?
+# TODO: groundplane extractor ?
+# TODO: basic dicom importer
+# TODO: adjustable wedge tool
+# TODO: click on plane and set an object with a give "height" allong the face normal
+# TODO: toggle radius cutter,
+# TODO: make cone and radius sphere density increas as the length grow longer.
+# TODO: preferences panel---- think materials, diameters
+# TODO: checkbox to retain tracking of the cone to secondary point
+# TODO: implement color selector panel
+# TODO: mesh cleaning tools
 
 ################################################################
-# helper functions BEGIN#############################################
+################## pointcloud to shaded geo nodes ####################
 ################################################################
-
-def purge_orphans():
-    """
-    Remove all orphan data blocks
-    https://youtu.be/3rNqVPtbhzc?t=149
-    """
-    if bpy.app.version >= (3, 0, 0):
-        # run this only for Blender versions 3.0 and higher
-        bpy.ops.outliner.orphans_purge(do_local_ids=True, do_linked_ids=True, do_recursive=True)
-    else:
-        # run this only for Blender versions lower than 3.0
-        # call purge_orphans() recursively until there are no more orphan data blocks to purge
-        result = bpy.ops.outliner.orphans_purge()
-        if result.pop() != "CANCELLED":
-            purge_orphans()
-
-
-def clean_scene():
-    """
-    Removing all of the objects, collection, materials, particles,
-    textures, images, curves, meshes, actions, nodes, and worlds from the 
-    https://youtu.be/3rNqVPtbhzc
-    """
-    # make sure the active object is not in Edit Mode
-    if bpy.context.active_object and bpy.context.active_object.mode == "EDIT":
-        bpy.ops.object.editmode_toggle()
-
-    # make sure non of the objects are hidden from the viewport, selection, or disabled
-    for obj in bpy.data.objects:
-        obj.hide_set(False)
-        obj.hide_select = False
-        obj.hide_viewport = False
-
-    # select all the object and delete them (just like pressing A + X + D in the viewport)
-    bpy.ops.object.select_all(action="SELECT")
-    bpy.ops.object.delete()
-
-    # find all the collections and remove them
-    collection_names = [col.name for col in bpy.data.collections]
-    for name in collection_names:
-        bpy.data.collections.remove(bpy.data.collections[name])
-
-    # in the case when you modify the world shader
-    # delete and recreate the world object
-    world_names = [world.name for world in bpy.data.worlds]
-    for name in world_names:
-        bpy.data.worlds.remove(bpy.data.worlds[name])
-    # create a new world data block
-    bpy.ops.world.new()
-    bpy.context.scene.world = bpy.data.worlds["World"]
-
-    purge_orphans()
-
-################################################################    
-# code BEGIN######################################################
-################################################################
+#TODO
+#  pointmeshsize to 1cm 
+#  viewportrendersetup
+#    -  renderer to cycle
+#    -  cycles to gpu
+#    -  max sample viewport 4x
 
 # import ply file *optional
 
@@ -67,6 +46,7 @@ def clean_scene():
 #  -    print("Downsample the point cloud with a voxel of 0.05")
 #  -    downpcd = pcd.voxel_down_sample(voxel_size=0.05)
 #  -    o3d.visualization.draw_geometries([downpcd])
+
 
 def create_material(name):
     material = bpy.data.materials.new(name=name)
@@ -87,8 +67,8 @@ def create_node(node_tree, type_name, node_x_location, node_location_step_x=0):
     node_obj = node_tree.nodes.new(type=type_name)
     node_obj.location.x = node_x_location
     node_x_location += node_location_step_x
-
     return node_obj, node_x_location
+
 
 def create_geo_nodes(name, mesh_point_size):
     
@@ -105,7 +85,6 @@ def create_geo_nodes(name, mesh_point_size):
     mesh_to_points_node.inputs[3].default_value = mesh_point_size
     set_material_node, node_x_location = create_node(geo_node_tree,"GeometryNodeSetMaterial",node_x_location, node_location_step_x)
     set_material_node.inputs[2].default_value = bpy.data.materials[name]
-    
     out_node.location.x =node_x_location
     
     geo_node_tree.links.new(in_node.outputs["Geometry"], mesh_to_points_node.inputs["Mesh"])
@@ -116,22 +95,9 @@ material_name = "test3"
 pointcloud_material = create_material(material_name)
 create_geo_nodes(material_name, 0.005)
 
-#TODO
-# set pointmeshsize to 1cm 
-# set renderer to cycle
-# set cycles to gpu
-# set mas sample viewportto 8
-################################################################
-# code END#######################################################
-################################################################    
-#def main():
-#    # scene_setup()
-#    create_material("test")
 
-#if __name__ == "__main__":
-#    main()
-    
-################################################################
+
+
 
 ################################################################
 ################         #Notes          ##################################
@@ -158,51 +124,3 @@ create_geo_nodes(material_name, 0.005)
 
 # - disable scene world
 #   bpy.data.screens["Default"].shading.use_scene_world_render
-
-#############################################################
-#############################################################
-
-#C:\Program Files\Blender Foundation\Blender 4.1\4.1\python\bin\python.exe -m pip install --upgrade --user open3d==0.18.0
-
-#############################################################
-############################################################
-# import numpy as np
-# import open3d as o3d
-
-# if __name__ == "__main__":
-
-#     print("Load a ply point cloud, print it, and render it")
-#     pcd = o3d.io.read_point_cloud("../../TestData/fragment.ply")
-#     print(pcd)
-#     print(np.asarray(pcd.points))
-#     o3d.visualization.draw_geometries([pcd])
-
-#     print("Downsample the point cloud with a voxel of 0.05")
-#     downpcd = pcd.voxel_down_sample(voxel_size=0.05)
-#     o3d.visualization.draw_geometries([downpcd])
-
-#     print("Recompute the normal of the downsampled point cloud")
-#     downpcd.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamHybrid(
-#         radius=0.1, max_nn=30))
-#     o3d.visualization.draw_geometries([downpcd])
-
-#     print("Print a normal vector of the 0th point")
-#     print(downpcd.normals[0])
-#     print("Print the normal vectors of the first 10 points")
-#     print(np.asarray(downpcd.normals)[:10, :])
-#     print("")
-
-#     print("Load a polygon volume and use it to crop the original point cloud")
-#     vol = o3d.visualization.read_selection_polygon_volume(
-#         "../../TestData/Crop/cropped.json")
-#     chair = vol.crop_point_cloud(pcd)
-#     o3d.visualization.draw_geometries([chair])
-#     print("")
-
-#     print("Paint chair")
-#     chair.paint_uniform_color([1, 0.706, 0])
-#     o3d.visualization.draw_geometries([chair])
-#     print("")
-
-    #############################################################
-    #############################################################

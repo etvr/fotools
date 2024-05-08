@@ -1,6 +1,4 @@
 '''
-Created by Alexander de Bruijn 2024
-
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -14,7 +12,7 @@ Created by Alexander de Bruijn 2024
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FOtools: a set of blender tools to assist in 3D-Forensic analysis
+FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de Bruijn 2024
 '''
 
 import bpy
