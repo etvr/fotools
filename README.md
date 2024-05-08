@@ -21,9 +21,9 @@ use at your own risk, we accept no responibillity whatsoever for any results, su
 
 
 #### - drawing a piramid with a given horizontal and vertical angle,
-    this can be used to represent a simple camera frustum
+   - this can be used to represent a simple camera frustum
 
-    ![blender_JsXYgdstCx](https://github.com/etvr/fotools/assets/858190/03c24f7c-7f3b-4eae-bbc6-915a1cad3741)
+   ![blender_JsXYgdstCx](https://github.com/etvr/fotools/assets/858190/03c24f7c-7f3b-4eae-bbc6-915a1cad3741)
 
   
 #### - a tool that aims a cone along the axis between two selected objects
