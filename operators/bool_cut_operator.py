@@ -12,7 +12,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de Bruijn 2024
+FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de Bruijn 2022
 '''
 
 from typing import List

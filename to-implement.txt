@@ -1,4 +1,7 @@
-
+# TODO measure  from the heartline of the frustum towards the horizontal and vertical axis of the defined plane
+# TODO: hide pontcloud outside of frustum
+# TODOplace protractor on set location
+# TODOmeasure angle to a set plane
 # TODO: redesign h and v angle polygon fuctions such that the have the same radius as measured over the center length
 # TODO: REFACTOR horizontal and vertical angel functions to single function in wichbthe h and v are passed as an array
 # TODO: REFACTOR CLEANUP out of bool_cut_operator
