@@ -1,36 +1,29 @@
-# TODO measure  from the heartline of the frustum towards the horizontal and vertical axis of the defined plane
-# TODO: hide pontcloud outside of frustum
-# TODOplace protractor on set location
-# TODOmeasure angle to a set plane
-# TODO: redesign h and v angle polygon fuctions such that the have the same radius as measured over the center length
-# TODO: REFACTOR horizontal and vertical angel functions to single function in wichbthe h and v are passed as an array
-# TODO: REFACTOR CLEANUP out of bool_cut_operator
+# TODO: operator        :  measure  from the heartline of the frustum towards the horizontal and vertical axis of the defined plane
 # TODO: eerste een tool waarmee een polygon word gemaakt met een opgegeven hoek op een van te voren bepaalde baseline
-# TODO: horizontalke en verticale camera fustrum tekenen (matty)
-# TODO: trajectory projection, add toggle  to foreward or back prohjection with toggle
-# TODO: resampling, voxel, spatial ?
-# TODO: add pointcloud geometrynodes
-# TODO: add logo and version to panel
-# TODO: custom icons
-# TODO: place humanoid m/f figure
-# TODO: field of view highlighter/ /checker
-# TODO: add edge to mesh line function
-# TODO: selector for: back-projection, foreward-projection, both, line-between.
-# TODO: if the angle ==0, draw a 9mm cylinder or a cone with a 1st and 2nd radius that is 9mm
-# TODO: ricochet lijn tool met verstelbare mirror lijn
+# TODO: horizontale en verticale camera fustrum tekenen (matty)
+# TODO: research        : hide pontcloud outside of frustum
+# TODO: tweak            : place protractor on set location
+# TODO: operator        : measure angle to a set plane
+# TODO: REFACTOR     : CLEANUP out of bool_cut_operator
+# TODO: ui                   : trajectory projection, add toggle  to foreward or back prohjection with toggle
+# TODO: ui:                  : add filebvrowser to  pointcloud geometrynodes
+# TODO: ui                   : add logo and version to panel
+# TODO: ui                   : custom icons
+# TODO: ui                   : place humanoid m/f figure
+# TODO: operator        : field of view highlighter/ /checker
+# TODO: research        : add edge to mesh line function
+# TODO: tweak / ui      : selector for: back-projection, foreward-projection, both, line-between.
+# TODO: tweak            : if the angle ==0, draw a 9mm cylinder or a cone with a 1st and 2nd radius that is 9mm
+# TODO: operator        : ricochet lijn tool met verstelbare mirror lijn
 # TODO: the impactpoint radius is now a point, this is not realistic, van be fixed my pulling impact pivot back towards a given cone radius
 # TODO: add a offset value for a perpendicular pivotpoint
-# TODO: basic pointcloud importer?
-# TODO: groundplane extractor ?
-# TODO: basic dicom importer
 # TODO: adjustable wedge tool
 # TODO: click on plane and set an object with a give "height" allong the face normal
-# TODO: toggle radius cutter,
-# TODO: make cone and radius sphere density increas as the length grow longer.
-# TODO: preferences panel---- think materials, diameters
-# TODO: checkbox to retain tracking of the cone to secondary point
-# TODO: implement color selector panel
-# TODO: mesh cleaning tools
+# TODO: ui                  : toggle radius cutter,
+# TODO: shader          : make cone and radius sphere density increas as the length grow longer.
+# TODO: ui                  : heckbox to retain tracking of the cone to secondary point
+# TODO: ui                  : implement color selector panel
+# TODO: operator       : voxel mesh cleaning
 
 ################################################################
 ################## pointcloud to shaded geo nodes ####################
