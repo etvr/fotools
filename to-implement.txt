@@ -5,7 +5,7 @@
 # TODO: operator        : measure angle to a set plane
 # TODO: REFACTOR     : CLEANUP out of bool_cut_operator
 # TODO: ui                   : trajectory projection, add toggle  to foreward or back prohjection with toggle
-# TODO: ui:                  : add filebvrowser to  pointcloud geometrynodes
+# TODO: ui:                  : add filebrowser to pointcloud geometrynodes
 # TODO: ui                   : add logo and version to panel
 # TODO: ui                   : custom icons
 # TODO: ui                   : place humanoid m/f figure

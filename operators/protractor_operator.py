@@ -85,8 +85,8 @@ class FOtools_OT_Protractor(bpy.types.Operator):
       vertex_c_h = calculate_triangle_coordinates(self, angle, radius)
       scalefactor = (radius / vertex_c_h[0]) 
       vertex_c_h = (vertex_c_h[0] * scalefactor, vertex_c_h[1] * scalefactor)
-      vertices_h_v[0] = 
-              [(0, 0, 0), 
+      vertices_h_v[0] = [
+              (0, 0, 0), 
               (vertex_c_h[0], (vertex_c_h[1] * -1), 0), 
               (vertex_c_h[0], vertex_c_h[1] , 0), 
               f"Angle_{angle_h}"]
@@ -95,15 +95,12 @@ class FOtools_OT_Protractor(bpy.types.Operator):
       vertex_c_v = calculate_triangle_coordinates(self, angle, radius)
       scalefactor = (radius / vertex_c_h[0]) 
       vertex_c_v = (vertex_c_v[0] * scalefactor, vertex_c_v[1] * scalefactor)
-      vertices_h_v[1] = 
-              [(0, 0, 0), 
+      vertices_h_v[1] = [
+              (0, 0, 0), 
               (vertex_c_v[0], 0, (vertex_c_v[1] * -1)), 
               (vertex_c_v[0], 0,vertex_c_v[1]), 
               f"Angle_{angle_h}"]
-              
-    foreach item in vertices_h_v:
-      if  not item:
-      else:
+    for item in vertices_h_v:
+      if  item:
         protractor_name = item[3]
         draw_polygon(self, [item[0],item[1],item[2]], faces, protractor_name)
-    pass
