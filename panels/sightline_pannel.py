@@ -25,10 +25,18 @@ class Sightline_analysis_pannel(bpy.types.Panel):
     bl_context = "objectmode"
     bl_category ="FOtools"
     
+    bpy.types.Scene.fov_color = bpy.props.FloatVectorProperty(
+                                 name = "myColor",
+                                 subtype = "COLOR",
+                                 size = 4,
+                                 min = 0.0,
+                                 max = 1.0,
+                                 default = (1.0,1.0,1.0,1.0))
+    
     def draw(self, context):
         layout = self.layout
         layout.use_property_split = True
         row = layout.row()
         row.label(text="Visualizes the FOV from a given point.")
-
+        self.layout.prop(context.scene, "fov_color")
         self.layout.operator("mesh.sightline_analsis", text="Create FOV", icon="HIDE_OFF")

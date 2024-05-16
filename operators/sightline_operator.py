@@ -34,28 +34,28 @@ class FOtools_OT_Sightlines(bpy.types.Operator):
 
 
   def execute(self, context):
-    pass
+    fov_color = bpy.context.scene.fov_color
+    self.draw_sightlines_fov(fov_color)
     return {"FINISHED"}
   
-  
-  
-  '''
-  
-  set to cycles
-  light falloff                                          emission                     light output
-                      - linear-------color       - emission--------------surface
-  
-                      - constant---strength
-  
-  
- 1: bpy.context.scene.render.engine = 'CYCLES'
- 2:  bpy.context.scene.cycles.device = 'GPU'
- 3: bpy.ops.object.light_add(type='POINT', align='WORLD', location=(0, 0, 0), scale=(1, 1, 1))
- 4: bpy.context.object.data.use_nodes = True
- 5:  bpy.ops.node.add_node(use_transform=True, type="ShaderNodeLightFalloff")
- 6:
- 7: 
- 8: bpy.data.lights["Point.001"].node_tree.nodes["Light Falloff"].inputs[0].default_value = 11
-
-  
-  '''
+  def draw_sightlines_fov(self, fov_color):
+    
+    # setup renderer
+    bpy.context.scene.render.engine = 'CYCLES'
+    bpy.context.scene.cycles.device = 'GPU'
+    bpy.context.object.data.cycles.max_bounces = 0
+    bpy.context.scene.cycles.preview_samples = 8
+    bpy.context.scene.cycles.use_preview_denoising = True
+    
+    #create pointlight
+    bpy.ops.object.light_add(type='POINT', align='WORLD', location=(0, 0, 0), scale=(1, 1, 1))
+    mylight  = bpy.context.active_object.data
+    mylight.color = [fov_color[0], fov_color[1], fov_color[2]]
+    
+    #create shadernetwork
+    mylight.use_nodes = True
+    emission_node = mylight.node_tree.nodes["Emission"]
+    falloff_node = mylight.node_tree.nodes.new(type="ShaderNodeLightFalloff")
+    falloff_node.inputs[0].default_value = 5
+    mylight.node_tree.links.new( falloff_node.outputs[1], emission_node.inputs[1] )
+    mylight.node_tree.links.new( falloff_node.outputs[2], emission_node.inputs[0] )

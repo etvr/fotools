@@ -1,11 +1,12 @@
-# TODO: operator        :  measure  from the heartline of the frustum towards the horizontal and vertical axis of the defined plane
+# TODO: ui                   : sightline panel needs a colorpicker
+# TODO: operator        : measure  from the heartline of the frustum towards the horizontal and vertical axis of the defined plane
 # TODO: operator        : tool that makes a face on an set angle relative to a user defined baseline: kindof an ofseet angle
 # TODO: research        : hide pontcloud outside of frustum
 # TODO: tweak            : place protractor on set location
 # TODO: operator        : measure angle to a set plane
 # TODO: REFACTOR     : CLEANUP out of bool_cut_operator
 # TODO: ui                   : trajectory projection, add toggle  to foreward or back prohjection with toggle
-# TODO: ui:                  : add filebrowser to pointcloud geometrynodes
+# TODO: ui                   : add filebrowser to pointcloud geometrynodes
 # TODO: ui                   : add logo and version to panel
 # TODO: ui                   : custom icons
 # TODO: ui                   : place humanoid m/f figure
