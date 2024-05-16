@@ -18,7 +18,8 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 
 import bpy
 
-from .panels.Field_of_view_panel import Field_of_view_Panel
+from .panels.sightline_pannel import Sightline_analysis_pannel
+from .operators.sightline_operator import FOtools_OT_Sightlines
 from .panels.impact_backprojection_panel import Backprojection_Panel
 from .operators.deflectioncone_operator import FOtools_OT_DeflectionCone
 from .panels.boolean_cutter_panel import Boolcut_Panel
@@ -34,8 +35,8 @@ bl_info = {
     "author": "Alexander de Bruijn",
     "version": (0, 1, 2, 2),
     "blender": (3, 3, 1),
-    "wiki_url": "www.google.com",
-    "tracker_url": "www....com",
+    "wiki_url": "https://github.com/etvr/fotools",
+    "tracker_url": "https://github.com/etvr/fotools",
     "category": "Generic"
 }
 
@@ -45,7 +46,8 @@ classes = [
     FOtools_OT_DeflectionCone,
     Boolcut_Panel,
     FOtools_OT_Bool_cut,
-    Field_of_view_Panel,
+    Sightline_analysis_pannel,
+    FOtools_OT_Sightlines,
     Geonode_pointcloud_Panel,
     Protractor_Panel,
     FOtools_OT_Protractor,

@@ -17,9 +17,9 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 
 import bpy
 
-class Field_of_view_Panel(bpy.types.Panel):
-    bl_label = "Field of view analysis"
-    bl_idname = "ETVR_PT_FOtools_Field_of_view"
+class Sightline_analysis_pannel(bpy.types.Panel):
+    bl_label = "Sightline analysis"
+    bl_idname = "ETVR_PT_FOtools_Sightline_analysis"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_context = "objectmode"
@@ -31,3 +31,4 @@ class Field_of_view_Panel(bpy.types.Panel):
         row = layout.row()
         row.label(text="Visualizes the FOV from a given point.")
 
+        self.layout.operator("mesh.sightline_analsis", text="Create FOV", icon="HIDE_OFF")
