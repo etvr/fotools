@@ -1,6 +1,6 @@
 # FOTools is a set of blender utilities aimed at forensic 3d-analysis.
 
-This program is distributed in the hope that it will be useful,
+This program is distributed in the hope that it will be useful,https://github.com/etvr/fotools/blob/master/README.md
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 
@@ -23,8 +23,14 @@ We accept no responibillity whatsoever for any results, sucesses, mistakes, dama
    - this can be used to represent a simple camera frustum
 
    ![blender_JsXYgdstCx](https://github.com/etvr/fotools/assets/858190/03c24f7c-7f3b-4eae-bbc6-915a1cad3741)
+   
+#### - a line of sight colorisation tool
+   - this tool creates a pointlight with a set color and almost no falloff.
+   - put the pointlight in a position where you want to colorize the possible sightlines from this position
+   - warning, this function will adjust your rendersettings! BEWARE!!
+   - 
+  ![blender_c8aogUNRO8](https://github.com/etvr/fotools/assets/858190/f0b752e6-4bce-4d29-95ed-f21c571bbf66)
 
-  
 #### - a tool that aims a cone along the axis between two selected objects
   the angle, length are user defined
   also the cone can be split into 3 seperatye objects wich are defiend by the minimum and maximum size of the middel segment
