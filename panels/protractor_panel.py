@@ -36,5 +36,6 @@ class Protractor_Panel(bpy.types.Panel):
         self.layout.prop(context.scene, "vertical_protractor_angle")
         self.layout.prop(context.scene, "horizontal_protractor_angle")
         self.layout.prop(context.scene, "protractor_radius")
+        self.layout.separator_spacer()
         self.layout.operator("mesh.protractor_angle", text="Create Angle", icon="DRIVER_ROTATIONAL_DIFFERENCE")
         self.layout.operator("mesh.draw_frustum", text="Create Frustum", icon="VIEW_CAMERA_UNSELECTED")

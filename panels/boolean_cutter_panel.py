@@ -32,6 +32,14 @@ class Boolcut_Panel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         layout.use_property_split = True
+        
+        layout.label(text="Select two mesh objects")
+        layout.prop_search(context.scene, "to_be_cut", context.scene, "objects", text="Object to be cut" )
+        layout.prop_search( context.scene, "knife_object", context.scene, "objects", text="Cutter Object", )
+        layout.separator_spacer()
+        layout.operator("mesh.bool_cut", text="Cut Object", icon="ORPHAN_DATA" ) 
+        
+        '''
         row = layout.row()
         row.label(text="Select two mesh objects")
         row = layout.row()
@@ -39,5 +47,6 @@ class Boolcut_Panel(bpy.types.Panel):
         row = layout.row()
         row.prop_search( context.scene, "knife_object", context.scene, "objects", text="Cutter Object", )
         row.separator_spacer()
-        row = layout.row()
-        row.operator("mesh.bool_cut", text="Cut Object", icon="ORPHAN_DATA" )
+        row = layout.row() 
+        row.operator("mesh.bool_cut", text="Cut Object", icon="ORPHAN_DATA" ) 
+        '''
