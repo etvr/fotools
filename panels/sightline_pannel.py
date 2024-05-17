@@ -26,7 +26,7 @@ class Sightline_analysis_pannel(bpy.types.Panel):
     bl_category ="FOtools"
     
     bpy.types.Scene.fov_color = bpy.props.FloatVectorProperty(
-                                 name = "myColor",
+                                 name = "FOV Color",
                                  subtype = "COLOR",
                                  size = 4,
                                  min = 0.0,
