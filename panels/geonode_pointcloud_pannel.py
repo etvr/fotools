@@ -29,5 +29,5 @@ class Geonode_pointcloud_Panel(bpy.types.Panel):
         layout = self.layout
         layout.use_property_split = True
         row = layout.row()
-        row.label(text="Load a pointcloud as Geonodes")
+        row.label(text="First, import a pointcloud .PLY file")
 
