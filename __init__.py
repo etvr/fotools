@@ -15,7 +15,6 @@
 FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de Bruijn 2022
 '''
 
-
 import bpy
 
 from .panels.sightline_pannel import Sightline_analysis_pannel
@@ -28,6 +27,7 @@ from .panels.geonode_pointcloud_pannel import Geonode_pointcloud_Panel
 from .panels.protractor_panel import Protractor_Panel
 from .operators.protractor_operator import FOtools_OT_Protractor
 from .operators.frustum_operator import FOtools_OT_Frustum
+from .operators.geonode_operator import FOtools_OT_GeonodePointcloud
 
 bl_info = {
     "name": "FOtools",
@@ -51,7 +51,8 @@ classes = [
     Geonode_pointcloud_Panel,
     Protractor_Panel,
     FOtools_OT_Protractor,
-    FOtools_OT_Frustum
+    FOtools_OT_Frustum,
+    FOtools_OT_GeonodePointcloud
     ]
 
 

@@ -15,11 +15,10 @@
 FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de Bruijn 2022
 '''
 
-
 #from typing import List
 import bpy
 
-class FOtools_OT_Protractor(bpy.types.Operator):
+class FOtools_OT_GeonodePointcloud(bpy.types.Operator):
     bl_idname ="FOtools_OT_pointcloud_as_geonode"
     bl_label = "FOtools, draw a pointcloud as geonodes"
     bl_description = "converts an imported PLY pointcloud to a geonode mesh with a color shader network"
@@ -30,38 +29,36 @@ class FOtools_OT_Protractor(bpy.types.Operator):
      return True
 
     def execute(self, context):
-        
+        create_material("pointcloud_mat")
+        create_geo_nodes("pointcloud_mat", 1)
+        adjust_render_settings()
+        return {"FINISHED"}
     
     def adjust_render_settings():
         bpy.ops.object.shade_smooth()
         bpy.data.screens["Default"].shading.type
         bpy.context.space_data.shading.type = 'RENDERED'
-
         # - switch to cycles
         bpy.data.scenes["Scene"].cycles.device
-
         # - switch to 8 samples in viewport
         bpy.context.scene.cycles.preview_samples = 8
-
         # - switch to denoise
         bpy.data.scenes["Scene"].cycles.use_preview_denoising
-
         # - disable scene lights
         bpy.data.screens["Default"].shading.use_scene_lights_render
-
         # - disable scene world
         bpy.data.screens["Default"].shading.use_scene_world_render
 
     def create_material(name):
-    material = bpy.data.materials.new(name=name)
-    material.use_nodes = True
-    principled_bsdf_node = material.node_tree.nodes["Principled BSDF"]
-    
-    #add col as given attribute Name
-    attribute_node=material.node_tree.nodes.new(type="ShaderNodeAttribute")
-    attribute_node.attribute_name = "Col"
-    material.node_tree.links.new(attribute_node.outputs["Color"], principled_bsdf_node.inputs["Base Color"])
-    return material
+        material = bpy.data.materials.new(name=name)
+        material.use_nodes = True
+        principled_bsdf_node = material.node_tree.nodes["Principled BSDF"]
+        
+        #add col as given attribute Name
+        attribute_node=material.node_tree.nodes.new(type="ShaderNodeAttribute")
+        attribute_node.attribute_name = "Col"
+        material.node_tree.links.new(attribute_node.outputs["Color"], principled_bsdf_node.inputs["Base Color"])
+        return material
 
 
 def create_node(node_tree, type_name, node_x_location, node_location_step_x=0):

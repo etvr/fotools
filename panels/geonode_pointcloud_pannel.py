@@ -29,5 +29,7 @@ class Geonode_pointcloud_Panel(bpy.types.Panel):
         layout = self.layout
         layout.use_property_split = True
         row = layout.row()
-        row.label(text="First, import a pointcloud .PLY file")
+        row.label(text="First, import a pointcloud .PLY file and make it your active selelction")
+        self.layout.separator_spacer()
+        self.layout.operator("FOtools_OT_pointcloud_as_geonode", text="Create pointcloud as geonodes", icon="HIDE_OFF")
 
