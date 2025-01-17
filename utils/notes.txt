@@ -1,0 +1,82 @@
+################################################################
+################## pointcloud to shaded geo nodes #####################
+################################################################
+def create_material(name):
+    material = bpy.data.materials.new(name=name)
+    material.use_nodes = True
+    principled_bsdf_node = material.node_tree.nodes["Principled BSDF"]
+    
+    #add col as given attribute Name
+    attribute_node=material.node_tree.nodes.new(type="ShaderNodeAttribute")
+    attribute_node.attribute_name = "Col"
+    material.node_tree.links.new(attribute_node.outputs["Color"], principled_bsdf_node.inputs["Base Color"])
+    return material
+
+
+def create_node(node_tree, type_name, node_x_location, node_location_step_x=0):
+    """Creates a node of a given type, and sets/updates the location of the node on the X axis.
+    Returning the node object and the next location on the X axis for the next node.
+    """
+    node_obj = node_tree.nodes.new(type=type_name)
+    node_obj.location.x = node_x_location
+    node_x_location += node_location_step_x
+    return node_obj, node_x_location
+
+
+def create_geo_nodes(name, mesh_point_size):
+    node_x_location = 0
+    node_location_step_x = 200
+
+    pointcloud_object = bpy.context.active_object
+    bpy.ops.node.new_geometry_nodes_modifier()
+    geo_node_tree = bpy.data.node_groups["Geometry Nodes"]
+    in_node = geo_node_tree.nodes['Group Input']
+    out_node = geo_node_tree.nodes["Group Output"]
+    
+    mesh_to_points_node,node_x_location = create_node(geo_node_tree,"GeometryNodeMeshToPoints",node_x_location, node_location_step_x)
+    mesh_to_points_node.inputs[3].default_value = mesh_point_size
+    set_material_node, node_x_location = create_node(geo_node_tree,"GeometryNodeSetMaterial",node_x_location, node_location_step_x)
+    set_material_node.inputs[2].default_value = bpy.data.materials[name]
+    out_node.location.x =node_x_location
+    
+    geo_node_tree.links.new(in_node.outputs["Geometry"], mesh_to_points_node.inputs["Mesh"])
+    geo_node_tree.links.new(mesh_to_points_node.outputs["Points"], set_material_node.inputs['Geometry'])
+    geo_node_tree.links.new(set_material_node.outputs['Geometry'], out_node.inputs['Geometry'])aps
+   
+material_name = "test3" 
+pointcloud_material = create_material(material_name)
+create_geo_nodes(material_name, 0.005)
+
+################################################################
+################         #Notes          ##################################
+################################################################
+
+# TODO
+#  import ply file *optional
+#  pointmeshsize to 1cm 
+#  viewportrendersetup
+#    -  renderer to cycle
+#    -  cycles to gpu
+#    -  max sample viewport 4x
+
+# bpy.ops.object.shade_smooth()
+# bpy.data.screens["Default"].shading.type
+# bpy.context.space_data.shading.type = 'RENDERED'
+
+# - switch to cycles
+#   bpy.data.scenes["Scene"].cycles.device
+
+# - switch to gpu
+#   bpy.data.scenes["Scene"].cycles.device
+
+# - switch to 8 samples in viewport
+#   bpy.context.scene.cycles.preview_samples = 8
+
+# - switch to denoise
+#   bpy.data.scenes["Scene"].cycles.use_preview_denoising
+
+# - disable scene lights
+#   bpy.data.screens["Default"].shading.use_scene_lights_render
+
+# - disable scene world
+#   bpy.data.screens["Default"].shading.use_scene_world_render

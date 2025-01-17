@@ -16,6 +16,8 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 '''
 
 import bpy
+import bpy.utils.previews
+
 
 class Backprojection_Panel(bpy.types.Panel):
     bl_label = "Trajectory projection"
