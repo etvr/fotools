@@ -16,6 +16,7 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 '''
 
 import bpy
+import bpy.utils.previews
 
 class Sightline_analysis_pannel(bpy.types.Panel):
     bl_label = "Sightline analysis"
@@ -26,7 +27,7 @@ class Sightline_analysis_pannel(bpy.types.Panel):
     bl_category ="FOtools"
     
     bpy.types.Scene.fov_color = bpy.props.FloatVectorProperty(
-                                 name = "myColor",
+                                 name = "FOV Color",
                                  subtype = "COLOR",
                                  size = 4,
                                  min = 0.0,
@@ -39,5 +40,4 @@ class Sightline_analysis_pannel(bpy.types.Panel):
         row = layout.row()
         row.label(text="Visualizes the FOV from a given point.")
         self.layout.prop(context.scene, "fov_color")
-        self.layout.separator_spacer()
-        self.layout.operator("mesh.sightline_analsis", text="Create FOV", icon="HIDE_OFF")
+  
