@@ -9,7 +9,6 @@
 # TODO: ui                   : add logo and version to panel
 # TODO: ui                   : custom icons
 # TODO: ui                   : place humanoid m/f figure
-# TODO: operator        : field of view highlighter/ /checker
 # TODO: research        : add edge to mesh line function
 # TODO: tweak / ui      : selector for: back-projection, forward-projection, both, line-between.
 # TODO: tweak            : if the angle ==0, draw a 9mm cylinder or a cone with a 1st and 2nd radius that is 9mm
@@ -18,6 +17,6 @@
 # TODO: ui                  : toggle radius cutter,
 # TODO: shader          : make cone and radius sphere density increase as the length grow longer.
 # TODO: ui                  : checkbox to retain tracking of the cone to secondary point
-# TODO: ui                  : implement color selector panel
 # TODO: operator       : voxel mesh cleaning
+#TODO: operator,       : the radius cutting spheres should be alligned with their top towards the cone axis
 
