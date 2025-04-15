@@ -19,7 +19,7 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 import bpy
 
 class FOtools_OT_GeonodePointcloud(bpy.types.Operator):
-    bl_idname ="FOtools_OT_pointcloud_as_geonode"
+    bl_idname ="mesh.pointcloud_as_geonode"
     bl_label = "FOtools, draw a pointcloud as geonodes"
     bl_description = "converts an imported PLY pointcloud to a geonode mesh with a color shader network"
     bl_options = {"UNDO"}
