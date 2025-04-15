@@ -18,16 +18,16 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 import bpy
 
 from .panels.sightline_pannel import Sightline_analysis_pannel
-from .operators.sightline_operator import FOtools_OT_Sightlines
-from .panels.impact_backprojection_panel import Backprojection_Panel
-from .operators.deflectioncone_operator import FOtools_OT_DeflectionCone
-from .panels.boolean_cutter_panel import Boolcut_Panel
-from .operators.bool_cut_operator import FOtools_OT_Bool_cut
 from .panels.geonode_pointcloud_pannel import Geonode_pointcloud_Panel
+from .panels.impact_backprojection_panel import Backprojection_Panel
+from .panels.boolean_cutter_panel import Boolcut_Panel
 from .panels.protractor_panel import Protractor_Panel
+from .operators.deflectioncone_operator import FOtools_OT_DeflectionCone
+from .operators.bool_cut_operator import FOtools_OT_Bool_cut
 from .operators.protractor_operator import FOtools_OT_Protractor
 from .operators.frustum_operator import FOtools_OT_Frustum
 from .operators.geonode_operator import FOtools_OT_GeonodePointcloud
+from .operators.sightline_operator import FOtools_OT_Sightlines
 
 bl_info = {
     "name": "FOtools",
@@ -46,12 +46,12 @@ classes = [
     FOtools_OT_DeflectionCone,
     Boolcut_Panel,
     FOtools_OT_Bool_cut,
-    Sightline_analysis_pannel,
-    FOtools_OT_Sightlines,
-    Geonode_pointcloud_Panel,
     Protractor_Panel,
     FOtools_OT_Protractor,
     FOtools_OT_Frustum,
+    Sightline_analysis_pannel,
+    FOtools_OT_Sightlines,
+    Geonode_pointcloud_Panel,
     FOtools_OT_GeonodePointcloud
     ]
 
