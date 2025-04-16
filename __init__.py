@@ -28,6 +28,7 @@ from .operators.protractor_operator import FOtools_OT_Protractor
 from .operators.frustum_operator import FOtools_OT_Frustum
 from .operators.geonode_operator import FOtools_OT_GeonodePointcloud
 from .operators.sightline_operator import FOtools_OT_Sightlines
+from .operators.clean_voxel_mesh_operator import MESH_OT_remove_close_faces
 
 bl_info = {
     "name": "FOtools",
@@ -52,7 +53,8 @@ classes = [
     Sightline_analysis_pannel,
     FOtools_OT_Sightlines,
     Geonode_pointcloud_Panel,
-    FOtools_OT_GeonodePointcloud
+    FOtools_OT_GeonodePointcloud,
+    MESH_OT_remove_close_faces
     ]
 
 

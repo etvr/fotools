@@ -16,7 +16,7 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 '''
 
 
-#from typing import List
+# from typing import List
 import bpy
 
 
