@@ -30,6 +30,7 @@ from .operators.geonode_operator import FOtools_OT_GeonodePointcloud
 from .operators.sightline_operator import FOtools_OT_Sightlines
 from .operators.clean_voxel_mesh_operator import MESH_OT_remove_close_faces
 from .operators.create_voxelmesh_from_p_cloud_operator import FOtools_OT_CreateVoxelMeshFromCloud
+from .operators.import_ply_file_operator import FOtools_OT_ImportPLY
 
 
 bl_info = {
@@ -57,7 +58,8 @@ classes = [
     Geonode_pointcloud_Panel,
     FOtools_OT_GeonodePointcloud,
     MESH_OT_remove_close_faces,
-    FOtools_OT_CreateVoxelMeshFromCloud
+    FOtools_OT_CreateVoxelMeshFromCloud,
+    FOtools_OT_ImportPLY
     ]
 
 
