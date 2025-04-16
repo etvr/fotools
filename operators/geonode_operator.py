@@ -24,17 +24,19 @@ class FOtools_OT_GeonodePointcloud(bpy.types.Operator):
     bl_description = "converts an imported PLY pointcloud to a geonode mesh with a color shader network"
     bl_options = {"UNDO"}
     
-    # @classmethod
-    # def poll(cls, context):
-    #  return True
+    @classmethod
+    def poll(cls, context):
+     return True
 
+    
     def execute(self, context):
+        MESH_POINT_SIZE = 0.02
         self.create_material("pointcloud_mat")
-        self.create_geo_nodes("pointcloud_mat", 1)
-        self.adjust_render_settings()
+        self.create_geo_nodes("pointcloud_mat", MESH_POINT_SIZE)
+        #self.adjust_render_settings()
         return {"FINISHED"}
     
-    def adjust_render_settings():
+    def adjust_render_settings(self):
         bpy.ops.object.shade_smooth()
         bpy.data.screens["Default"].shading.type
         bpy.context.space_data.shading.type = 'RENDERED'
