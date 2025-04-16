@@ -22,7 +22,7 @@
 # TODO: ui                   : toggle radius cutter,
 #
 # TODO: research        : create a voxel mesh from a pointcloud (embed numpy and open3d)
-# TODO: research        : embed pnp point into plugin
+# TODO: research        : embed pnppoint
 # TODO: research        : add edge to mesh line function
 # TODO: research        : hide pointcloud outside of frustum
 #

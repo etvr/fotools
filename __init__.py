@@ -29,6 +29,8 @@ from .operators.frustum_operator import FOtools_OT_Frustum
 from .operators.geonode_operator import FOtools_OT_GeonodePointcloud
 from .operators.sightline_operator import FOtools_OT_Sightlines
 from .operators.clean_voxel_mesh_operator import MESH_OT_remove_close_faces
+from .operators.create_voxelmesh_from_p_cloud_operator import FOtools_OT_CreateVoxelMeshFromCloud
+
 
 bl_info = {
     "name": "FOtools",
@@ -54,7 +56,8 @@ classes = [
     FOtools_OT_Sightlines,
     Geonode_pointcloud_Panel,
     FOtools_OT_GeonodePointcloud,
-    MESH_OT_remove_close_faces
+    MESH_OT_remove_close_faces,
+    FOtools_OT_CreateVoxelMeshFromCloud
     ]
 
 
@@ -70,4 +73,3 @@ def unregister():
 
 if __name__ == "__main__":
     register()
-

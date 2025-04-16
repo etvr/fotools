@@ -45,10 +45,7 @@ class FOtools_OT_Sightlines(bpy.types.Operator):
     bpy.context.scene.cycles.device = 'GPU'
     bpy.context.scene.cycles.preview_samples = 8
     bpy.context.scene.cycles.max_bounces = 0
-  
-
     bpy.context.scene.cycles.use_preview_denoising = False
-    
     
     #create pointlight
     bpy.ops.object.light_add(type='POINT', align='WORLD', location=(0, 0, 0), scale=(1, 1, 1))
