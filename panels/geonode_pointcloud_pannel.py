@@ -16,7 +16,7 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 '''
 
 import bpy
-from bpy_extras.io_utils import ImportHelper
+
 
 class Geonode_pointcloud_Panel(bpy.types.Panel):
     bl_label = "convert a PLY pointcloud to geonodes"
@@ -30,7 +30,7 @@ class Geonode_pointcloud_Panel(bpy.types.Panel):
         layout = self.layout
         layout.use_property_split = True
         row = layout.row()
-        row.label(text="First, import a pointcloud .PLY file and make it your active selelction")
+        row.label(text="import a pointcloud .PLY file and make sure it is selected.  Pointsize is settable in the geometry node editor on the top level of the ply object,")
         self.layout.separator_spacer()
         self.layout.operator("fotools.import_ply_pointcloud", text="Import PLY File", icon="FILEBROWSER")
-        self.layout.operator("FOtools_OT_pointcloud_as_geonode", text="Create pointcloud as geonodes", icon="HIDE_OFF")
+        self.layout.operator("mesh.pointcloud_as_geonode", text="Create pointcloud as geonodes", icon="HIDE_OFF")
