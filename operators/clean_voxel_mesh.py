@@ -8,33 +8,30 @@
 
 
 
-'''
+
 import bpy
 import bmesh
 from mathutils import Vector
 import math
 
 def find_and_remove_close_faces():
-    # Get the active mesh
-    obj = bpy.context.active_object
-    if obj is None or obj.type != 'MESH':
+    active_object = bpy.context.active_object
+    if active_object is None or active_object.type != 'MESH':
         print("Please select a mesh object")
         return
     
-    # Parameters
     DISTANCE_THRESHOLD = 0.001  # Distance threshold for considering faces as "close"
     
-    # Create bmesh from object
     bm = bmesh.new()
-    bm.from_mesh(obj.data)
+    bm.from_mesh(active_object.data)
     bm.faces.ensure_lookup_table()
     
     # Calculate face centers and normals
     face_data = []
     for face in bm.faces:
-        center = face.calc_center_median()
-        normal = face.normal
-        face_data.append((face, center, normal))
+        face_center = face.calc_center_median()
+        face_normal = face.normal
+        face_data.append((face, face_center, face_normal))
     
     # Find close face pairs
     faces_to_remove = set()
@@ -44,26 +41,16 @@ def find_and_remove_close_faces():
             # Skip if either face is already marked for removal
             if face1 in faces_to_remove or face2 in faces_to_remove:
                 continue
-            
-            # Calculate distance between face centers
-            distance = (center1 - center2).length
-            
-            # Calculate angle between face normals
-            angle = math.degrees(normal1.angle(normal2))
-            
+            face_center_distance = (center1 - center2).length
+            normal_angle_between = math.degrees(normal1.angle(normal2))
             # Check if faces are close and parallel/anti-parallel
-            if distance < DISTANCE_THRESHOLD and (angle < 10 or angle > 170):
+            if face_center_distance < DISTANCE_THRESHOLD and (normal_angle_between < 10 or normal_angle_between > 170):
                 faces_to_remove.add(face1)
                 faces_to_remove.add(face2)
     
-    # Remove the faces
     bmesh.ops.delete(bm, geom=list(faces_to_remove), context='FACES')
-    
-    # Update the mesh
-    bm.to_mesh(obj.data)
-    obj.data.update()
-    
-    # Free the bmesh
+    bm.to_mesh(active_object.data)
+    active_object.data.update()
     bm.free()
     
     print(f"Removed {len(faces_to_remove)} faces")
@@ -72,7 +59,7 @@ def find_and_remove_close_faces():
 class MESH_OT_remove_close_faces(bpy.types.Operator):
     bl_idname = "mesh.remove_close_faces"
     bl_label = "Remove Close Faces"
-    bl_description = "Remove pairs of faces that are very close together"
+    bl_description = "Remove planar pairs of faces that are very close together"
     bl_options = {'REGISTER', 'UNDO'}
     
     def execute(self, context):
@@ -86,7 +73,4 @@ def unregister():
     bpy.utils.unregister_class(MESH_OT_remove_close_faces)
 
 if __name__ == "__main__":
-    register()'''
-    
-    
-    
+    register()
