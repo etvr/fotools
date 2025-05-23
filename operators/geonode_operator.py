@@ -33,23 +33,13 @@ class FOtools_OT_GeonodePointcloud(bpy.types.Operator):
         MESH_POINT_SIZE = 0.02
         self.create_material("pointcloud_mat")
         self.create_geo_nodes("pointcloud_mat", MESH_POINT_SIZE)
-        #self.adjust_render_settings()
+        self.adjust_render_settings()
         return {"FINISHED"}
     
     def adjust_render_settings(self):
         bpy.ops.object.shade_smooth()
-        bpy.data.screens["Default"].shading.type
-        bpy.context.space_data.shading.type = 'RENDERED'
-        # - switch to cycles
-        bpy.data.scenes["Scene"].cycles.device
-        # - switch to 8 samples in viewport
-        bpy.context.scene.cycles.preview_samples = 8
-        # - switch to denoise
-        bpy.data.scenes["Scene"].cycles.use_preview_denoising
-        # - disable scene lights
-        bpy.data.screens["Default"].shading.use_scene_lights_render
-        # - disable scene world
-        bpy.data.screens["Default"].shading.use_scene_world_render
+        bpy.context.space_data.shading.type = 'MATERIAL'
+
 
     def create_material(self, name):
         material = bpy.data.materials.new(name=name)

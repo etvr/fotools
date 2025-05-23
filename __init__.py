@@ -37,8 +37,8 @@ bl_info = {
     "name": "FOtools",
     "description": "3D-forensic Utillities for Blender by ETVR, https://www.politie.nl/informatie/expertteam-visualisatie-en-reconstructie.html",
     "author": "Alexander de Bruijn",
-    "version": (0, 1, 2, 2),
-    "blender": (3, 3, 1),
+    "version": (0, 2, 1),
+    "blender": (4, 4, 0),
     "wiki_url": "https://github.com/etvr/fotools",
     "tracker_url": "https://github.com/etvr/fotools",
     "category": "Generic"
