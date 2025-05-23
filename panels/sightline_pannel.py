@@ -40,4 +40,6 @@ class Sightline_analysis_pannel(bpy.types.Panel):
         row = layout.row()
         row.label(text="Visualizes the FOV from a given point.")
         self.layout.prop(context.scene, "fov_color")
+        layout.separator_spacer()
+        layout.operator("mesh.sightline_analsis", text="Create Viewpoint", icon="HIDE_OFF" ) 
   

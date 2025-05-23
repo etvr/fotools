@@ -5,6 +5,8 @@ the script takes a HOROS roi file andplaces blender spheres on the extracted coo
 import bpy
 
 # setup
+#TODO: native fileselection dialog
+
 roi_file_path = "C:\\Users\\alexander\\OneDrive\\Desktop\\Test ETVR\\rois.txt"
 split_string_line = "3D Pos:"
 split_string_coordinates = "mm"
