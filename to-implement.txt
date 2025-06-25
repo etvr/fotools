@@ -4,31 +4,31 @@
 # TODO: REFACTOR     : is the slice and cut operator doubled in bool_cut and in boolean_cutter?
 # TODO: REFACTOR     : ply importer and geonodeconversion should be done with a single button, make an operator that does both in  sequence
 #
-# TODO: tweak            : place protractor on set location
-# TODO: tweak            : if the angle ==0, draw a 9mm cylinder or a cone with a 1st and 2nd radius that is 9mm
-# TODO: tweak            :  geonode shader: ditch the BDSF shader and straightup connect the "col" attribute to the outbput color
+# TODO: tweak        : place protractor on set location
+# TODO: tweak        : if the angle ==0, draw a 9mm cylinder or a cone with a 1st and 2nd radius that is 9mm
+# TODO: tweak        :  geonode shader: ditch the BDSF shader and straightup connect the "col" attribute to the outbput color
 #
-# TODO: operator        : voxel mesh cleaning
-# TODO: operator        : measure  from the centerline of the frustum towards the horizontal and vertical axis of the defined plane
-# TODO: operator        : tool that makes a face on an set angle relative to a user defined baseline: kind of an offset angle
-# TODO: operator        : measure angle to a set plane
-# TODO: operator        : the radius cutting spheres should be alligned with their top towards the cone axis
-# TODO: operator        : ricochet line tool met adjustable mirror line
-# TODO: operator        : click on plane and place an object with a give height on that location perpendicular to the face
+# TODO: operator     : voxel mesh cleaning
+# TODO: operator     : measure  from the centerline of the frustum towards the horizontal and vertical axis of the defined plane
+# TODO: operator     : tool that makes a face on an set angle relative to a user defined baseline: kind of an offset angle
+# TODO: operator     : measure angle to a set plane
+# TODO: operator     : the radius cutting spheres should be alligned with their top towards the cone axis
+# TODO: operator     : ricochet line tool met adjustable mirror line
+# TODO: operator     : click on plane and place an object with a give height on that location perpendicular to the face
 #
-# TODO: ui                   : trajectory projection, add toggle  to forward or back projection with toggle
-# TODO: ui                   : add logo and version to panel
-# TODO: ui                   : custom icons
-# TODO: ui                   : place humanoid m/f figure
-# TODO: ui                   : checkbox to retain tracking of the cone to secondary point
-# TODO: ui                   : toggle radius cutter,
+# TODO: ui           : trajectory projection, add toggle  to forward or back projection with toggle
+# TODO: ui           : add logo and version to panel
+# TODO: ui           : custom icons
+# TODO: ui           : place humanoid m/f figure
+# TODO: ui           : checkbox to retain tracking of the cone to secondary point
+# TODO: ui           : toggle radius cutter,
 #
-# TODO: research        : create a voxel mesh from a pointcloud (embed numpy and open3d)
-# TODO: research        : embed pnppoint
-# TODO: research        : add edge to mesh line function
-# TODO: research        : hide pointcloud outside of frustum
+# TODO: research     : create a voxel mesh from a pointcloud (embed numpy and open3d)
+# TODO: research     : embed pnppoint
+# TODO: research     : add edge to mesh line function
+# TODO: research     : hide pointcloud outside of frustum
 #
-# TODO: shader           : make cone and radius sphere density increase as the length grow longer.
+# TODO: shader       : make cone and radius sphere density increase as the length grow longer.
 #
 #-----------------------------------------------------------------------------------------------------------------------------------------------------#
 
