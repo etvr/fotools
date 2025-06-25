@@ -31,8 +31,8 @@ from .operators.sightline_operator import FOtools_OT_Sightlines
 from .operators.clean_voxel_mesh_operator import MESH_OT_remove_close_faces
 from .operators.create_voxelmesh_from_p_cloud_operator import FOtools_OT_CreateVoxelMeshFromCloud
 from .operators.import_ply_file_operator import FOtools_OT_ImportPLY
-
-
+# from .operators.best_fit_line_operator import Best_Fit_Line_Operator
+# from .panels.best_fit_line import BestFitLinePanel
 
 # bl_info = {
 #     "name": "FOtools",
@@ -60,7 +60,9 @@ classes = [
     FOtools_OT_GeonodePointcloud,
     MESH_OT_remove_close_faces,
     FOtools_OT_CreateVoxelMeshFromCloud,
-    FOtools_OT_ImportPLY
+    FOtools_OT_ImportPLY,
+    # BestFitLinePanel, 
+    # Best_Fit_Line_Operator
     ]
 
 
