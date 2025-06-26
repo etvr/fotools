@@ -18,39 +18,77 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis
 '''
 import bpy
 
-def newMaterial(name):
+def newMaterial(name: str) -> bpy.types.Material:
+    """
+    Creates a new Blender material or retrieves an existing one by name.
+    If a material with the given name already exists, its node tree will be
+    cleared to provide a clean slate for new shader setups.
+
+    Args:
+        name (str): The name for the material.
+
+    Returns:
+        bpy.types.Material: The created or retrieved Blender material.
+    """
     mat = bpy.data.materials.get(name)
 
     if mat is None:
         mat = bpy.data.materials.new(name=name)
 
     mat.use_nodes = True
-
+    
+    # Clear existing nodes and links to ensure a clean slate for the new shader
     if mat.node_tree:
         mat.node_tree.links.clear()
         mat.node_tree.nodes.clear()
 
     return mat
 
-def newShader(name, type, r, g, b):
+def newShader(name: str, shader_type: str, r: float, g: float, b: float,
+              emission_strength: float = 1.0, glossy_roughness: float = 0.0) -> bpy.types.Material:
+    """
+    Creates a new material with a specified shader type and color.
+
+    Args:
+        name (str): The name for the material.
+        shader_type (str): The type of shader to create ("diffuse", "emission", "glossy").
+        r (float): Red component of the color (0.0-1.0).
+        g (float): Green component of the color (0.0-1.0).
+        b (float): Blue component of the color (0.0-1.0).
+        emission_strength (float, optional): Strength for emission shader. Defaults to 1.0.
+        glossy_roughness (float, optional): Roughness for glossy shader. Defaults to 0.0.
+
+    Returns:
+        bpy.types.Material: The created Blender material with the specified shader.
+
+    Raises:
+        ValueError: If an unsupported shader type is provided.
+    """
     mat = newMaterial(name)
     nodes = mat.node_tree.nodes
     links = mat.node_tree.links
     output = nodes.new(type="ShaderNodeOutputMaterial")
+    shader = None # Initialize shader to None
 
-    if type == "diffuse":
+    color = (r, g, b, 1) # Blender colors are typically RGBA
+
+    if shader_type == "diffuse":
         shader = nodes.new(type="ShaderNodeBsdfDiffuse")
-        nodes["Diffuse BSDF"].inputs[0].default_value = (r, g, b, 1)
+        shader.inputs[0].default_value = color
 
-    elif type == "emission":
+    elif shader_type == "emission":
         shader = nodes.new(type="ShaderNodeEmission")
-        nodes["Emission"].inputs[0].default_value = (r, g, b, 1)
-        nodes["Emission"].inputs[1].default_value = 1
+        shader.inputs[0].default_value = color
+        shader.inputs[1].default_value = emission_strength
 
-    elif type == "glossy":
+    elif shader_type == "glossy":
         shader = nodes.new(type="ShaderNodeBsdfGlossy")
-        nodes["Glossy BSDF"].inputs[0].default_value = (r, g, b, 1)
-        nodes["Glossy BSDF"].inputs[1].default_value = 0
+        shader.inputs[0].default_value = color
+        shader.inputs[1].default_value = glossy_roughness
+    else:
+        raise ValueError(f"Unsupported shader type: {shader_type}. Supported types are 'diffuse', 'emission', 'glossy'.")
 
+    # Link the shader to the material output
+    if shader: # Ensure shader was created before linking
     links.new(shader.outputs[0], output.inputs[0])
     return mat
