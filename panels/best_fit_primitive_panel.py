@@ -12,23 +12,22 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de Bruijn 2022
+FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de Bruijn 2025
 '''
-
 import bpy
-import bpy.utils.previews
 
-class BestFitLinePanel(bpy.types.Panel):
-    bl_label = "Best Fit Line"
-    bl_idname = "ETVR_PT_FOTools_BestFitLine"
-    bl_space_type = "VIEW_3D"
-    bl_region_type = "UI"
-    bl_context = "objectmode"
-    bl_category = "FOtools"
+class FOTOOLS_PT_fit_panel(bpy.types.Panel):
+    """Creates a Panel in the 3D Viewport for fitting primitives"""
+    bl_label = "Fit Primitives"
+    bl_idname = "FOTOOLS_PT_fit_panel"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = 'FOtools '
 
     def draw(self, context):
         layout = self.layout
-        layout.use_property_split = True
-        layout.operator("mesh.best_fit_line", text="Create Best Fit Line", icon="CURVE_BEZCURVE")
-        layout.separator_spacer()
-        layout.label(text="Select vertices in edit mode to create a best fit line.")
+        col = layout.column(align=True)
+        col.label(text="Fit to Selection:")
+        col.operator(FOTOOLS_OT_fit_plane.bl_idname)
+        col.operator(FOTOOLS_OT_fit_sphere.bl_idname)
+        col.operator(FOTOOLS_OT_fit_cylinder.bl_idname)

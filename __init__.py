@@ -33,6 +33,12 @@ from .operators.sightline_operator import FOtools_OT_Sightlines
 from .operators.clean_voxel_mesh_operator import MESH_OT_remove_close_faces
 from .operators.create_voxelmesh_from_p_cloud_operator import FOtools_OT_CreateVoxelMeshFromCloud
 from .operators.import_ply_file_operator import FOtools_OT_ImportPLY
+from.panels.best_fit_primitive_panel import FOTOOLS_PT_fit_panel
+from.operators.fit_primitive import (
+    FOTOOLS_OT_fit_plane,
+    FOTOOLS_OT_fit_sphere,
+    FOTOOLS_OT_fit_cylinder)
+    
 
 
 # bl_info = {
@@ -49,21 +55,25 @@ from .operators.import_ply_file_operator import FOtools_OT_ImportPLY
 
 classes = [
     BestFitLinePanel,
-    Best_Fit_Line_Operator,
     Backprojection_Panel,
     FOtools_OT_DeflectionCone,
     Boolcut_Panel,
-    FOtools_OT_Bool_cut,
     Protractor_Panel,
-    FOtools_OT_Protractor,
-    FOtools_OT_Frustum,
     Sightline_analysis_pannel,
-    FOtools_OT_Sightlines,
     Geonode_pointcloud_Panel,
+    FOtools_OT_Frustum,
+    FOtools_OT_Sightlines,
     FOtools_OT_GeonodePointcloud,
-    MESH_OT_remove_close_faces,
+    FOtools_OT_Protractor,
     FOtools_OT_CreateVoxelMeshFromCloud,
+    FOtools_OT_Bool_cut,
     FOtools_OT_ImportPLY,
+    Best_Fit_Line_Operator,
+    MESH_OT_remove_close_faces,
+    FOTOOLS_OT_fit_plane,
+    FOTOOLS_OT_fit_sphere,
+    FOTOOLS_OT_fit_cylinder,
+    FOTOOLS_PT_fit_panel
     # BestFitLinePanel, 
     # Best_Fit_Line_Operator
     ]
