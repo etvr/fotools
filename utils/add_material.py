@@ -90,5 +90,5 @@ def newShader(name: str, shader_type: str, r: float, g: float, b: float,
 
     # Link the shader to the material output
     if shader: # Ensure shader was created before linking
-    links.new(shader.outputs[0], output.inputs[0])
-    return mat
+        links.new(shader.outputs[0], output.inputs[0])
+        return mat

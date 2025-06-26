@@ -26,8 +26,18 @@ class FOTOOLS_PT_fit_panel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        col = layout.column(align=True)
-        col.label(text="Fit to Selection:")
-        col.operator(FOTOOLS_OT_fit_plane.bl_idname)
-        col.operator(FOTOOLS_OT_fit_sphere.bl_idname)
-        col.operator(FOTOOLS_OT_fit_cylinder.bl_idname)
+        layout.use_property_split = True
+        layout.label(text="Fit to Selection:")
+#       layout.operator("mesh.best_fit_line", text="Create Best Fit Line", icon="CURVE_BEZCURVE")
+
+        layout.operator("fotools.fit_plane", text="create best fit plane")
+        layout.operator("fotools.fit_sphere", text="create best fit plane")
+        layout.operator("fotools.fit_cylinder", text="create best fit plane")
+        #layout.operator("fotools.fit_box", text="create best fit box")
+        #layout.operator("fotools.fit_cone", text="create best fit cone")
+        #layout.operator("fotools.fit_torus", text="create best fit torus")
+        #layout.operator("fotools.fit_line", text="create best fit line")
+        #layout.operator("fotools.fit_circle", text="create best fit circle")
+        #layout.operator("fotools.fit_3pcircle", text="create best fit 3pcircle")
+        #layout.operator("fotools.fit_bwtarget", text="create best fit bw target")
+ 
