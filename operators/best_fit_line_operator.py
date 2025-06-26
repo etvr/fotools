@@ -28,9 +28,11 @@ class Best_Fit_Line_Operator(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        # Show panel in both Object Mode and Edit Mode (for meshes)
-        return context.mode in {'EDIT_MESH'}
+        return context.active_object is not None and context.active_object.type == 'MESH'
 
+    def execute(self, context):
+        self.create_best_fit_line()
+        return {'FINISHED'}
     
     def create_best_fit_line(self):
         # Get the active object

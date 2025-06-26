@@ -16,6 +16,8 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 '''
 
 import bpy
+import bpy.utils.previews
+
 
 class Backprojection_Panel(bpy.types.Panel):
     bl_label = "Trajectory projection"
@@ -27,10 +29,10 @@ class Backprojection_Panel(bpy.types.Panel):
 
     bpy.types.Scene.impact_point = bpy.props.PointerProperty(type=bpy.types.Object)
     bpy.types.Scene.secondary_point = bpy.props.PointerProperty(type=bpy.types.Object)
-    bpy.types.Scene.deflection_angle = bpy.props.FloatProperty( name="Degrees Uncertainty", description=" Uncertainty in degrees", min=0, max=360, default=5,)
-    bpy.types.Scene.minimal_distance = bpy.props.FloatProperty( name="Min Distance", description="minimal distance in meters", min=0, max=5, default=0.25, )
-    bpy.types.Scene.maximal_distance = bpy.props.FloatProperty( name="Max Distance", description="maximal_distance in meters", min=0, max=20, default=0.8, )
-    bpy.types.Scene.total_length = bpy.props.FloatProperty( name="Total Length", description="total length in degrees ", min=1, max=50, default=10, )
+    bpy.types.Scene.deflection_angle = bpy.props.FloatProperty( name="Cone deflection", description="Total uncertainty in degrees", min=0, max=360, default=5,)
+    bpy.types.Scene.minimal_distance = bpy.props.FloatProperty( name="Min distance", description="Minimal distance in meters", min=0, max=5, default=0.25, )
+    bpy.types.Scene.maximal_distance = bpy.props.FloatProperty( name="Max distance", description="Maximal_distance in meters", min=0, max=20, default=0.8, )
+    bpy.types.Scene.total_length = bpy.props.FloatProperty( name="Total length", description="Total length in degrees ", min=1, max=50, default=10, )
 
     def draw(self, context):
         layout = self.layout

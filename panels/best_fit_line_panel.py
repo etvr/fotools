@@ -32,3 +32,4 @@ class BestFitLinePanel(bpy.types.Panel):
         layout.operator("mesh.best_fit_line", text="Create Best Fit Line", icon="CURVE_BEZCURVE")
         layout.separator_spacer()
         layout.label(text="Select vertices to create a best fit line.")
+        layout.label(text="make sure to apply all transforms before use!")

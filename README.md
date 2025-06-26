@@ -7,8 +7,8 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ## WARNING, assume that all results of these tools are WRONG! 
 these tools make large rounding errors and the calculations are questionable at best.
 YOU as the analyst make your own findings based on your knowledge and insight, not the tool.
-these tools might assist you but their results are annything but conclusive so use at your own risk.
-We accept no responibillity whatsoever for any results, sucesses, mistakes, damages or harm in any form that might result in your use of this code.
+these tools might assist you but their results are anything but conclusive so use at your own risk.
+We accept no responsibility whatsoever for any results, successes, mistakes, damages or harm in any form that might result in your use of this code.
 
  ### it contains a utilities for:
 
@@ -19,7 +19,7 @@ We accept no responibillity whatsoever for any results, sucesses, mistakes, dama
   ![blender_In0mdvSHWO](https://github.com/etvr/fotools/assets/858190/8547fae7-f7c7-4db5-8892-504f967805fe)
 
 
-#### - drawing a piramid with a given horizontal and vertical angle,
+#### - drawing a frustum with a given horizontal and vertical angle,
    - this can be used to represent a simple camera frustum
 
    ![blender_JsXYgdstCx](https://github.com/etvr/fotools/assets/858190/03c24f7c-7f3b-4eae-bbc6-915a1cad3741)
@@ -38,6 +38,11 @@ We accept no responibillity whatsoever for any results, sucesses, mistakes, dama
   
    ![blender_vV9a68e5Pj](https://github.com/etvr/fotools/assets/858190/94669524-f3ac-4965-b459-daaeff9fb17f)
 
+#### - a PLY-pointcloud to geometry nodes converter
+    - import a binary encoded pointcloud, rgb color is suported
+    - keep the pointcloud small, 1 to 5 million points depending on the systems specs
+    - once loaded, click the conversion buton.
+    - switch to viewport shading to render in color
 
 ## How to Install the add-on
  - save the code as a zipfile

@@ -82,7 +82,7 @@ class FOtools_OT_DeflectionCone(bpy.types.Operator):
             )
             deflectioncone = bpy.context.active_object
             
-        aim_object_to(deflectioncone, secondary_point)      
+        aim_object_to(deflectioncone, secondary_point)   
         self.set_origin(bpy.context.object,self.get_cone_top_vertex_coordinate())
         deflectioncone.location = secondary_point.location
         return deflectioncone
