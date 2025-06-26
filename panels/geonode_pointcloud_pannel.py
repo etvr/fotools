@@ -22,7 +22,7 @@ class Geonode_pointcloud_Panel(bpy.types.Panel):
     bl_idname = "ETVR_PT_FOtools_geonode_pointcloud"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_context = "objectmode"
+    #bl_context = "objectmode"
     bl_category ="FOtools"
     
     def draw(self, context):

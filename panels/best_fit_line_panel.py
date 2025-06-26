@@ -16,28 +16,19 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 '''
 
 import bpy
+import bpy.utils.previews
 
-class Sightline_analysis_pannel(bpy.types.Panel):
-    bl_label = "Sightline analysis"
-    bl_idname = "ETVR_PT_FOtools_Sightline_analysis"
+class BestFitLinePanel(bpy.types.Panel):
+    bl_label = "Best Fit Line"
+    bl_idname = "ETVR_PT_FOTools_BestFitLine"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    #bl_context = "objectmode"
-    bl_category ="FOtools"
-    
-    bpy.types.Scene.fov_color = bpy.props.FloatVectorProperty(
-                                 name = "myColor",
-                                 subtype = "COLOR",
-                                 size = 4,
-                                 min = 0.0,
-                                 max = 1.0,
-                                 default = (1.0,1.0,1.0,1.0))
-    
+    #bl_context = "edit_mesh"
+    bl_category = "FOtools"
+
     def draw(self, context):
         layout = self.layout
         layout.use_property_split = True
-        row = layout.row()
-        row.label(text="Visualizes the FOV from a given point.")
-        self.layout.prop(context.scene, "fov_color")
-        self.layout.separator_spacer()
-        self.layout.operator("mesh.sightline_analsis", text="Create FOV", icon="HIDE_OFF")
+        layout.operator("mesh.best_fit_line", text="Create Best Fit Line", icon="CURVE_BEZCURVE")
+        layout.separator_spacer()
+        layout.label(text="Select vertices to create a best fit line.")

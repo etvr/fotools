@@ -18,6 +18,8 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 
 import bpy
 
+from .panels.best_fit_line_panel import BestFitLinePanel
+from .operators.best_fit_line_operator import Best_Fit_Line_Operator
 from .panels.sightline_pannel import Sightline_analysis_pannel
 from .operators.sightline_operator import FOtools_OT_Sightlines
 from .panels.impact_backprojection_panel import Backprojection_Panel
@@ -42,6 +44,8 @@ bl_info = {
 
 
 classes = [
+    BestFitLinePanel,
+    Best_Fit_Line_Operator,
     Backprojection_Panel,
     FOtools_OT_DeflectionCone,
     Boolcut_Panel,
@@ -67,4 +71,3 @@ def unregister():
 
 if __name__ == "__main__":
     register()
-

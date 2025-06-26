@@ -22,7 +22,7 @@ class Protractor_Panel(bpy.types.Panel):
     bl_idname = "ETVR_PT_FO_protractor_tools"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_context = "objectmode"
+    #bl_context = "objectmode"
     bl_category = "FOtools"
 
     bpy.types.Scene.vertical_protractor_angle = bpy.props.FloatProperty( name="Vertical Angle", description=" Angle for the vertical angle polygon", min=0.0, max=360.0, default=44.0,)

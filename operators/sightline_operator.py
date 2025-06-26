@@ -30,7 +30,7 @@ class FOtools_OT_Sightlines(bpy.types.Operator):
 
   @classmethod
   def poll(cls, context):
-    return True
+      return context.mode in {'OBJECT', 'EDIT_MESH'}
 
 
   def execute(self, context):
@@ -40,7 +40,7 @@ class FOtools_OT_Sightlines(bpy.types.Operator):
   
   def draw_sightlines_fov(self, fov_color):
     
-    # setup renderer
+    #setup renderer
     bpy.context.scene.render.engine = 'CYCLES'
     bpy.context.scene.cycles.device = 'GPU'
     bpy.context.object.data.cycles.max_bounces = 0

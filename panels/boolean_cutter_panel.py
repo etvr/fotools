@@ -23,11 +23,15 @@ class Boolcut_Panel(bpy.types.Panel):
     bl_idname = "ETVR_PT_FOtools_Bool_Cut"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_context = "objectmode"
     bl_category ="FOtools"
 
     bpy.types.Scene.to_be_cut = bpy.props.PointerProperty(type=bpy.types.Object)
     bpy.types.Scene.knife_object = bpy.props.PointerProperty(type=bpy.types.Object)
+
+    @classmethod
+    def poll(cls, context):
+        # Show panel in both Object Mode and Edit Mode (for meshes)
+        return context.mode in {'OBJECT', 'EDIT_MESH'}
 
     def draw(self, context):
         layout = self.layout
