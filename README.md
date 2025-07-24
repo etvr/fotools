@@ -1,4 +1,4 @@
-# FOTools is a set of blender utilities aimed at forensic 3d-analysis.
+# FOTools is a set of blender utilities aimed at forensic 3d-visualisation.
 
 This program is distributed in the hope that it will be useful,https://github.com/etvr/fotools/blob/master/README.md
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -8,7 +8,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 these tools make large rounding errors and the calculations are questionable at best.
 YOU as the analyst make your own findings based on your knowledge and insight, not the tool.
 these tools might assist you but their results are anything but conclusive so use at your own risk.
-We accept no responsibility whatsoever for any results, successes, mistakes, damages or harm in any form that might result in your use of this code.
+We accept no responsibility whatsoever for any results, successes, mistakes, damages or harm in any form that might result in usage of this code.
 
  ### it contains a utilities for:
 
