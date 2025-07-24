@@ -25,8 +25,18 @@ class FOTOOLS_PT_AngleMeasurementPanel(bpy.types.Panel):
     bl_region_type = 'UI'
     bl_category = 'FOTools'
 
+    # Define property on the scene so it's persistent and accessible
+    bpy.types.Scene.fotools_angle_label_size = bpy.props.FloatProperty(
+        name="Label Size",
+        description="Size of the angle measurement text label",
+        default=0.1,
+        min=0.001,
+        unit='LENGTH'
+    )
+
     def draw(self, context):
         layout = self.layout
+        scene = context.scene
         
         col = layout.column(align=True)
         col.label(text="Select 3 objects.")
@@ -35,3 +45,4 @@ class FOTOOLS_PT_AngleMeasurementPanel(bpy.types.Panel):
         # The operator button will be automatically greyed out
         # if its poll() method returns False.
         col.operator("fotools.measure_angle", text="Measure Angle", icon='CON_TRACKTO')
+        col.prop(scene, "fotools_angle_label_size")

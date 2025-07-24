@@ -124,8 +124,7 @@ class FOTOOLS_OT_MeasureAngle(bpy.types.Operator):
         text_curve.body = f"{angle_deg:.2f}°"
         text_curve.align_x = 'CENTER'
         text_curve.align_y = 'CENTER'
-        # Scale text size based on the distance to keep it readable.
-        text_curve.size = label_dist / 2.0
+        text_curve.size = context.scene.fotools_angle_label_size
 
         label_obj = bpy.data.objects.new(name="AngleLabel", object_data=text_curve)
         label_obj.location = label_pos
