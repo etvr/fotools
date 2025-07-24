@@ -42,6 +42,8 @@ from .operators.visual_angle_protractor_operator import OBJECT_OT_add_angle_prot
 from .operators.visual_angle_protractor_operator import add_visual_protractor_button
 from .operators.concentric_circles_operator import FOTOOLS_OT_concentric_circles
 from .panels.concentric_circles_panel import FOTOOLS_PT_concentric_circles
+from .operators.angle_measurement_operator import FOTOOLS_OT_MeasureAngle
+from .panels.angle_measurement_panel import FOTOOLS_PT_AngleMeasurementPanel
     
 
 
@@ -80,6 +82,8 @@ classes = [
     FOTOOLS_PT_fit_panel,
     FOTOOLS_OT_concentric_circles,
     FOTOOLS_PT_concentric_circles,
+    FOTOOLS_OT_MeasureAngle,
+    FOTOOLS_PT_AngleMeasurementPanel,
     ]
 
 
