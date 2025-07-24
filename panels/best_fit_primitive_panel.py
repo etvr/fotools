@@ -1,43 +1,44 @@
-'''
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de Bruijn 2025
-'''
 import bpy
 
 class FOTOOLS_PT_fit_panel(bpy.types.Panel):
-    """Creates a Panel in the 3D Viewport for fitting primitives"""
+    """Creates a Panel in the Viewport N panel"""
     bl_label = "Fit Primitives"
-    bl_idname = "FOTOOLS_PT_fit_panel"
+    bl_idname = "FOTOOLS_PT_fit"
     bl_space_type = 'VIEW_3D'
+    bl_category = "FO-Tools"
     bl_region_type = 'UI'
-    bl_category = 'FOtools '
+
+    @classmethod
+    def poll(cls, context):
+        return context.active_object is not None and context.active_object.mode == 'EDIT' and context.active_object.type == 'MESH'
 
     def draw(self, context):
         layout = self.layout
-        layout.use_property_split = True
-        layout.label(text="Fit to Selection:")
-#       layout.operator("mesh.best_fit_line", text="Create Best Fit Line", icon="CURVE_BEZCURVE")
 
-        layout.operator("fotools.fit_plane", text="create best fit plane")
-        layout.operator("fotools.fit_sphere", text="create best fit plane")
-        layout.operator("fotools.fit_cylinder", text="create best fit plane")
-        #layout.operator("fotools.fit_box", text="create best fit box")
-        #layout.operator("fotools.fit_cone", text="create best fit cone")
-        #layout.operator("fotools.fit_torus", text="create best fit torus")
-        #layout.operator("fotools.fit_line", text="create best fit line")
-        #layout.operator("fotools.fit_circle", text="create best fit circle")
-        #layout.operator("fotools.fit_3pcircle", text="create best fit 3pcircle")
-        #layout.operator("fotools.fit_bwtarget", text="create best fit bw target")
- 
+        obj = context.active_object
+
+        layout.label(text="Fit to Selection:")
+        layout.label(text="APPLY ALL TRANSFORMS BEFORE FITTING")
+
+        # Plane fitting
+        layout.operator("fotools.fit_plane")
+
+        # Line fitting
+        layout.operator("fotools.fit_line")
+
+        # Sphere fitting
+        layout.operator("fotools.fit_sphere")
+
+        # Cylinder fitting
+        layout.operator("fotools.fit_cylinder")
+
+        # Circle fitting with segments property
+        layout.row().operator("fotools.fit_circle").segments = 32  # Default segments value
+
+
+def register():
+    bpy.utils.register_class(FOTOOLS_PT_fit_panel)
+
+
+def unregister():
+    bpy.utils.unregister_class(FOTOOLS_PT_fit_panel)

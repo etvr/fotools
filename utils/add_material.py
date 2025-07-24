@@ -23,12 +23,6 @@ def newMaterial(name: str) -> bpy.types.Material:
     Creates a new Blender material or retrieves an existing one by name.
     If a material with the given name already exists, its node tree will be
     cleared to provide a clean slate for new shader setups.
-
-    Args:
-        name (str): The name for the material.
-
-    Returns:
-        bpy.types.Material: The created or retrieved Blender material.
     """
     mat = bpy.data.materials.get(name)
 
@@ -46,24 +40,7 @@ def newMaterial(name: str) -> bpy.types.Material:
 
 def newShader(name: str, shader_type: str, r: float, g: float, b: float,
               emission_strength: float = 1.0, glossy_roughness: float = 0.0) -> bpy.types.Material:
-    """
-    Creates a new material with a specified shader type and color.
 
-    Args:
-        name (str): The name for the material.
-        shader_type (str): The type of shader to create ("diffuse", "emission", "glossy").
-        r (float): Red component of the color (0.0-1.0).
-        g (float): Green component of the color (0.0-1.0).
-        b (float): Blue component of the color (0.0-1.0).
-        emission_strength (float, optional): Strength for emission shader. Defaults to 1.0.
-        glossy_roughness (float, optional): Roughness for glossy shader. Defaults to 0.0.
-
-    Returns:
-        bpy.types.Material: The created Blender material with the specified shader.
-
-    Raises:
-        ValueError: If an unsupported shader type is provided.
-    """
     mat = newMaterial(name)
     nodes = mat.node_tree.nodes
     links = mat.node_tree.links

@@ -31,4 +31,28 @@
 # TODO: shader       : make cone and radius sphere density increase as the length grow longer.
 #
 #-----------------------------------------------------------------------------------------------------------------------------------------------------#
+# --- fitting tools ---
+# linefit
+# 3p circle
+# spherefit
+# cyclinder fit
+# plane fit
+# intercect 3 plane corner
+#-----------------------------------------------------------------------------------------------------------------------------------------------------#
+#--- measuring
+# 10th degree angles,
+# poly text dimension lines
+# circulair distance grid
+# 360 poly protractor 1 axix
+# 360 poly protractor 2 axis
+# 360 poly protractor 3axis
+# 180 poly protractor 1 axix
+# 180 poly protractor 2 axis
+# 180 poly protractor 3axis
 
+#-----------------------------------------------------------------------------------------------------------------------------------------------------#
+# MESH_CIRCLE
+# MESH_PLANE
+# MESH UV SPHERE
+# MESH_CYCLINDER
+# FIXED_SIZE

@@ -19,7 +19,7 @@ import bpy
 
 
 class Geonode_pointcloud_Panel(bpy.types.Panel):
-    bl_label = "convert a PLY pointcloud to geonodes"
+    bl_label = "PLY-pointcloud to geonodes"
     bl_idname = "ETVR_PT_FOtools_geonode_pointcloud"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"

@@ -17,8 +17,8 @@ FOtools: a set of blender tools to assist in 3D-Forensic analysis Alexander de B
 
 import bpy
 
-from .panels.best_fit_line_panel import BestFitLinePanel
-from .operators.best_fit_line_operator import Best_Fit_Line_Operator
+# from .panels.best_fit_line_panel import BestFitLinePanel
+# from .operators.best_fit_line_operator import Best_Fit_Line_Operator
 from .panels.sightline_pannel import Sightline_analysis_pannel
 from .panels.geonode_pointcloud_pannel import Geonode_pointcloud_Panel
 from .panels.impact_backprojection_panel import Backprojection_Panel
@@ -33,11 +33,11 @@ from .operators.sightline_operator import FOtools_OT_Sightlines
 from .operators.clean_voxel_mesh_operator import MESH_OT_remove_close_faces
 from .operators.create_voxelmesh_from_p_cloud_operator import FOtools_OT_CreateVoxelMeshFromCloud
 from .operators.import_ply_file_operator import FOtools_OT_ImportPLY
-from.panels.best_fit_primitive_panel import FOTOOLS_PT_fit_panel
-from.operators.fit_primitive import (
-    FOTOOLS_OT_fit_plane,
-    FOTOOLS_OT_fit_sphere,
-    FOTOOLS_OT_fit_cylinder)
+from .panels.best_fit_primitive_panel import FOTOOLS_PT_fit_panel
+from .operators.fit_primitive import FOTOOLS_OT_fit_plane, FOTOOLS_OT_fit_line
+from .operators.fit_primitive import FOTOOLS_OT_fit_sphere
+from .operators.fit_primitive import FOTOOLS_OT_fit_cylinder
+from .operators.fit_primitive import FOTOOLS_OT_fit_circle
     
 
 
@@ -54,7 +54,6 @@ from.operators.fit_primitive import (
 
 
 classes = [
-    BestFitLinePanel,
     Backprojection_Panel,
     FOtools_OT_DeflectionCone,
     Boolcut_Panel,
@@ -68,14 +67,16 @@ classes = [
     FOtools_OT_CreateVoxelMeshFromCloud,
     FOtools_OT_Bool_cut,
     FOtools_OT_ImportPLY,
-    Best_Fit_Line_Operator,
+    FOTOOLS_OT_fit_line,
     MESH_OT_remove_close_faces,
     FOTOOLS_OT_fit_plane,
     FOTOOLS_OT_fit_sphere,
     FOTOOLS_OT_fit_cylinder,
+    FOTOOLS_OT_fit_circle,
     FOTOOLS_PT_fit_panel
     # BestFitLinePanel, 
     # Best_Fit_Line_Operator
+    # BestFitLinePanel,
     ]
 
 

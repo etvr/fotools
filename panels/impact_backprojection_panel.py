@@ -24,7 +24,6 @@ class Backprojection_Panel(bpy.types.Panel):
     bl_idname = "ETVR_PT_FOTools_Backprojection"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    #bl_context = "objectmode"
     bl_category ="FOtools"
 
     bpy.types.Scene.impact_point = bpy.props.PointerProperty(type=bpy.types.Object)
