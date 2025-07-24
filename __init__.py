@@ -38,6 +38,8 @@ from .operators.fit_primitive import FOTOOLS_OT_fit_plane, FOTOOLS_OT_fit_line
 from .operators.fit_primitive import FOTOOLS_OT_fit_sphere
 from .operators.fit_primitive import FOTOOLS_OT_fit_cylinder
 from .operators.fit_primitive import FOTOOLS_OT_fit_circle
+from .operators.concentric_circles_operator import FOTOOLS_OT_concentric_circles
+from .panels.concentric_circles_panel import FOTOOLS_PT_concentric_circles
     
 
 
@@ -73,7 +75,9 @@ classes = [
     FOTOOLS_OT_fit_sphere,
     FOTOOLS_OT_fit_cylinder,
     FOTOOLS_OT_fit_circle,
-    FOTOOLS_PT_fit_panel
+    FOTOOLS_PT_fit_panel,
+    FOTOOLS_OT_concentric_circles,
+    FOTOOLS_PT_concentric_circles
     # BestFitLinePanel, 
     # Best_Fit_Line_Operator
     # BestFitLinePanel,
