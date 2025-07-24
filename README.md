@@ -14,7 +14,7 @@ We accept no responsibility whatsoever for any results, successes, mistakes, dam
 
 #### - drawing an equilateral triangle
   the top corner angle and radius are defined by the user
-  this can be used to illustrate or analyse a field of view (FOV)
+  this can be used to illustrate a field of view (FOV)
   
   ![blender_In0mdvSHWO](https://github.com/etvr/fotools/assets/858190/8547fae7-f7c7-4db5-8892-504f967805fe)
 
@@ -33,7 +33,7 @@ We accept no responsibility whatsoever for any results, successes, mistakes, dam
 
 #### - Gunshot trajectory illusstration. a tool that aims a cone along the axis between two selected objects 
   - the angle, length are user defined
-  - the cone can be split into 3 seperatye objects wich are defiend by the minimum and maximum size of the middel segment
+  - the cone can be split into 3 seperatye objects wich are defiend by the minimum and maximum size of the middle segment
 
   
    ![blender_vV9a68e5Pj](https://github.com/etvr/fotools/assets/858190/94669524-f3ac-4965-b459-daaeff9fb17f)
@@ -51,7 +51,7 @@ We accept no responsibility whatsoever for any results, successes, mistakes, dam
   ![blender_concentric_circles](https://github.com/etvr/fotools/assets/858190/placeholder_for_circles.png)
 
 #### - Primitive Fitting Tools
-  - A set of tools to fit geometric primitives to a selection of vertices (in Edit Mode) ~~~or objects (in Object Mode)~~
+  - A set of tools to fit geometric primitives to a selection of vertices (in Edit Mode)
   - To use, select the target geometry, then click the desired fitting button.
   - The fitting algirithm will report an rms value in the console
   - Supported primitives include:
