@@ -24,27 +24,27 @@ We accept no responsibility whatsoever for any results, successes, mistakes, dam
 
    ![blender_JsXYgdstCx](https://github.com/etvr/fotools/assets/858190/03c24f7c-7f3b-4eae-bbc6-915a1cad3741)
    
-#### - a line of sight colorisation tool
+#### - Line of sight colorisation tool
    - this tool creates a pointlight with a set color and almost no falloff.
    - put the pointlight in a position where you want to colorize the possible sightlines from this position
    - warning, this function will adjust your rendersettings! BEWARE!!
    - 
   ![blender_c8aogUNRO8](https://github.com/etvr/fotools/assets/858190/f0b752e6-4bce-4d29-95ed-f21c571bbf66)
 
-#### - a tool that aims a cone along the axis between two selected objects
-  the angle, length are user defined
-  also the cone can be split into 3 seperatye objects wich are defiend by the minimum and maximum size of the middel segment
-  this tool can be used to illustrate or analyse gunshot trajectory
+#### - Gunshot trajectory illusstration. a tool that aims a cone along the axis between two selected objects 
+  - the angle, length are user defined
+  - the cone can be split into 3 seperatye objects wich are defiend by the minimum and maximum size of the middel segment
+
   
    ![blender_vV9a68e5Pj](https://github.com/etvr/fotools/assets/858190/94669524-f3ac-4965-b459-daaeff9fb17f)
 
-#### - a PLY-pointcloud to geometry nodes converter
+#### - PLY-pointcloud to geometry nodes converter
     - import a binary encoded PLY-file pointcloud, rgb color is suported
     - keep the pointcloud small, 1 to 5 million points depending on the systems specs
     - once loaded, click the conversion buton.
     - switch to viewport shading to render in color
 
-#### - a concentric circle grid generator
+#### - Concentric circle grid generator (circulair distance grid)
   - Creates a grid of concentric circles with customizable radius, number of circles, and resolution.
   - Useful for visualizing distances and areas of interest around a central point.
 
