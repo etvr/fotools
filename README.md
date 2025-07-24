@@ -39,17 +39,36 @@ We accept no responsibility whatsoever for any results, successes, mistakes, dam
    ![blender_vV9a68e5Pj](https://github.com/etvr/fotools/assets/858190/94669524-f3ac-4965-b459-daaeff9fb17f)
 
 #### - a PLY-pointcloud to geometry nodes converter
-    - import a binary encoded pointcloud, rgb color is suported
+    - import a binary encoded PLY-file pointcloud, rgb color is suported
     - keep the pointcloud small, 1 to 5 million points depending on the systems specs
     - once loaded, click the conversion buton.
     - switch to viewport shading to render in color
+
+#### - a concentric circle grid generator
+  - Creates a grid of concentric circles with customizable radius, number of circles, and resolution.
+  - Useful for visualizing distances and areas of interest around a central point.
+
+  ![blender_concentric_circles](https://github.com/etvr/fotools/assets/858190/placeholder_for_circles.png)
+
+#### - Primitive Fitting Tools
+  - A set of tools to fit geometric primitives to a selection of vertices (in Edit Mode) ~~~or objects (in Object Mode)~~
+  - To use, select the target geometry, then click the desired fitting button.
+  - The fitting algirithm will report an rms value in the console
+  - Supported primitives include:
+    - **Fit Line**: Fits a straight line through the selected points.
+    - **Fit Plane**: Fits a flat plane to the selected points.
+    - **Fit Circle**: Fits a circle to three selected points, the circle can be fittend in the xy plane or in the best fit plane.
+    - **Fit Cylinder**: Fits a cylinder to the selected points.
+    - **Fit Sphere**: Fits a sphere to the selected points.
+
+  ![blender_fitting_tools](https://github.com/etvr/fotools/assets/858190/placeholder_for_fitting.png)
 
 ## How to Install the add-on
  - save the code as a zipfile
  - open blender, goto menu "EDIT" > "PREFERENCES"
  - in the preferences screen in the left sidebar click on "Add-ons"
  - click on "Install" in the top right
- - navigate to the previously saved zipfile and clikc on "Install Add-on"
+ - navigate to the previously saved zipfile and click on "Install Add-on"
 
    the addon will show op in the 3d-view as a "N-pannel" called FOTools
 

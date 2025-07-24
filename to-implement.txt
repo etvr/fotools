@@ -56,3 +56,5 @@
 # MESH UV SPHERE
 # MESH_CYCLINDER
 # FIXED_SIZE
+# Add an option to change the color of the protractor and labels.
+# add an option to set the color of the distance circle grid labels
