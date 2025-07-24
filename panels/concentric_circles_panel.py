@@ -25,7 +25,54 @@ class FOTOOLS_PT_concentric_circles(bpy.types.Panel):
     bl_region_type = 'UI'
     bl_category = "FO-Tools"
 
+    # Define properties on the scene so they are persistent and accessible
+    bpy.types.Scene.concentric_num_circles = bpy.props.IntProperty(
+        name="Circles",
+        description="How many concentric circles to create",
+        default=10,
+        min=1,
+        max=100
+    )
+    bpy.types.Scene.concentric_start_radius = bpy.props.FloatProperty(
+        name="Start Radius",
+        description="The radius of the first circle",
+        default=1.0,
+        min=0.01,
+        unit='LENGTH'
+    )
+    bpy.types.Scene.concentric_radius_step = bpy.props.FloatProperty(
+        name="Radius Step",
+        description="The increase in radius for each subsequent circle",
+        default=1.0,
+        min=0.01,
+        unit='LENGTH'
+    )
+    bpy.types.Scene.concentric_align_to_object = bpy.props.BoolProperty(
+        name="Align to Object",
+        description="Align the circles to the selected object's orientation",
+        default=False
+    )
+    bpy.types.Scene.concentric_label_size = bpy.props.FloatProperty(
+        name="Label Size",
+        description="The font size of the radius labels",
+        default=0.2,
+        min=0.01,
+        unit='LENGTH'
+    )
+
+
     def draw(self, context):
         layout = self.layout
+        scene = context.scene
         layout.label(text="Select an object as the center:")
+
+        col = layout.column(align=True)
+        col.prop(scene, "concentric_num_circles")
+        col.prop(scene, "concentric_start_radius")
+        col.prop(scene, "concentric_radius_step")
+
+        layout.prop(scene, "concentric_align_to_object")
+        layout.prop(scene, "concentric_label_size")
+
+        layout.separator()
         layout.operator("fotools.create_concentric_circles", text="Create Circles", icon="MESH_CIRCLE")
