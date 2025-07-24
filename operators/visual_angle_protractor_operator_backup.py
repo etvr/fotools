@@ -33,7 +33,7 @@ from bpy_extras.object_utils import AddObjectHelper, object_data_add
 from bpy.props import FloatProperty, IntProperty, BoolProperty
 
 
-class OBJECT_OT_add_angle_protractor(bpy.types.Operator, AddObjectHelper):
+class OBJECT_OT_add_protractor(bpy.types.Operator, AddObjectHelper):
     """Create a new Protractor object"""
     bl_idname = "mesh.add_protractor"
     bl_label = "Add Protractor"
@@ -240,6 +240,17 @@ class OBJECT_OT_add_angle_protractor(bpy.types.Operator, AddObjectHelper):
 
         return {'FINISHED'}
 
-def add_visual_protractor_button(self, context):
+def add_protractor_button(self, context):
     """Adds the operator to the Add > Mesh menu."""
-    self.layout.operator(OBJECT_OT_add_angle_protractor.bl_idname, text="Protractor", icon='MOD_CURVE')
+    self.layout.operator(OBJECT_OT_add_protractor.bl_idname, text="Protractor", icon='MOD_CURVE')
+
+def register():
+    bpy.utils.register_class(OBJECT_OT_add_protractor)
+    bpy.types.VIEW3D_MT_mesh_add.append(add_protractor_button)
+
+def unregister():
+    bpy.utils.unregister_class(OBJECT_OT_add_protractor)
+    bpy.types.VIEW3D_MT_mesh_add.remove(add_protractor_button)
+
+if __name__ == "__main__":
+    register()

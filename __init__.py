@@ -38,6 +38,8 @@ from .operators.fit_primitive import FOTOOLS_OT_fit_plane, FOTOOLS_OT_fit_line
 from .operators.fit_primitive import FOTOOLS_OT_fit_sphere
 from .operators.fit_primitive import FOTOOLS_OT_fit_cylinder
 from .operators.fit_primitive import FOTOOLS_OT_fit_circle
+from .operators.visual_angle_protractor_operator import OBJECT_OT_add_angle_protractor
+from .operators.visual_angle_protractor_operator import add_visual_protractor_button
 from .operators.concentric_circles_operator import FOTOOLS_OT_concentric_circles
 from .panels.concentric_circles_panel import FOTOOLS_PT_concentric_circles
     
@@ -77,21 +79,24 @@ classes = [
     FOTOOLS_OT_fit_circle,
     FOTOOLS_PT_fit_panel,
     FOTOOLS_OT_concentric_circles,
-    FOTOOLS_PT_concentric_circles
-    # BestFitLinePanel, 
-    # Best_Fit_Line_Operator
-    # BestFitLinePanel,
+    FOTOOLS_PT_concentric_circles,
     ]
 
 
 def register():
+    print("Registering Protractor Operator")
+    bpy.utils.register_class(OBJECT_OT_add_angle_protractor)
+    bpy.types.VIEW3D_MT_mesh_add.append(add_visual_protractor_button)
     for cls in classes:
         bpy.utils.register_class(cls)
 
 
 def unregister():
+    bpy.utils.unregister_class(OBJECT_OT_add_angle_protractor)
+    bpy.types.VIEW3D_MT_mesh_add.remove(add_visual_protractor_button)
     for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
+
 
 
 if __name__ == "__main__":
