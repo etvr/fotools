@@ -31,7 +31,6 @@ class FOTOOLS_OT_concentric_circles(bpy.types.Operator):
         Helper function to create a single circle and its corresponding label,
         and parent them to a given object.
         """
-        # --- Create Circle ---
         bpy.ops.mesh.primitive_circle_add(
             vertices=64,
             radius=radius,
@@ -43,7 +42,6 @@ class FOTOOLS_OT_concentric_circles(bpy.types.Operator):
         circle_obj.name = f"Circle_Radius_{radius:.2f}".replace('.', '_')
         circle_obj.parent = parent
 
-        # --- Create Label ---
         # Define the label's position relative to the circle's center
         label_offset_local = Vector((radius, 0, 0))
 

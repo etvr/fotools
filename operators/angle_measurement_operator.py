@@ -27,7 +27,7 @@ class FOTOOLS_OT_MeasureAngle(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        # This operator requires three selected objects, one of which is active.
+        # This operator requires three selected objects
         return context.active_object is not None and len(context.selected_objects) == 3
 
     def execute(self, context):
@@ -42,11 +42,9 @@ class FOTOOLS_OT_MeasureAngle(bpy.types.Operator):
         p_end1 = other_objs[0].location
         p_end2 = other_objs[1].location
 
-        # Create vectors from the vertex to the endpoints.
         vec1 = p_end1 - p_vertex
         vec2 = p_end2 - p_vertex
 
-        # Calculate the angle between the two vectors.
         angle_rad = vec1.angle(vec2)
         angle_deg = math.degrees(angle_rad)
 
@@ -75,7 +73,6 @@ class FOTOOLS_OT_MeasureAngle(bpy.types.Operator):
         if plane_normal.length > 1e-6:
             plane_normal.normalize()
 
-            # Use a radius that is a fraction of the vector lengths
             arc_radius = (vec1.length + vec2.length) / 16.0
             num_segments = 32
 
@@ -104,7 +101,6 @@ class FOTOOLS_OT_MeasureAngle(bpy.types.Operator):
             arc_obj.parent = angle_measurement_empty
 
         # 4. Create the text label for the angle.
-        # Position the label midway between the two vectors.
         label_pos_vec_dir = (vec1.normalized() + vec2.normalized())
         
         # Handle the case where vectors are opposite, to avoid a zero-length direction vector.
