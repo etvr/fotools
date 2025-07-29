@@ -1,0 +1,21 @@
+schema_version = "1.0.0"
+
+id = "FOTools_blender"
+version = "0.2.1"
+name = "FOTools"
+tagline = "various utilities for forensic 3d visualisation"
+maintainer = "Alexander de Bruijn"
+type = "add-on"
+website = "https://github.com/etvr/fotools"
+blender_version_min = "4.4.0"
+license = ["SPDX:GPL-3.0-or-later"]
+
+#wheels = [
+#   "./wheels/matplotlib-3.10.3-cp312-cp312-win_amd64.whl",
+#   "./wheels/numpy-2.2.5-cp310-cp310-win_amd64.whl",
+#   "./wheels/open3d-0.19.0-cp312-cp312-win_amd64.whl",
+#   "./wheels/scikit_image-0.25.2-cp312-cp312-win_amd64.whl",
+#]
+
+[permissions]
+files = "Import ply-pointclouds from disk"

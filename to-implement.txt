@@ -1,0 +1,59 @@
+#-----------------------------------------------------------------------------------------------------------------------------------------------------#
+#
+# TODO: REFACTOR     : OT_CLEANUP out of bool_cut_operator
+# TODO: REFACTOR     : is the slice and cut operator doubled in bool_cut and in boolean_cutter?
+#
+# TODO: tweak        : place protractor on set location
+# TODO: tweak        : if the angle ==0, draw a 9mm cylinder or a cone with a 1st and 2nd radius that is 9mm
+# TODO: tweak        :  geonode shader: ditch the BDSF shader and straightup connect the "col" attribute to the outbput color
+# TODO: tweaks       : Add an option to change the color of the protractor and labels.
+# TODO: tweaks       : add an option to set the color of the distance circle grid labels
+#
+# TODO: operator     : voxel mesh cleaning
+# TODO: operator     : measure  from the centerline of the frustum towards the horizontal and vertical axis of the defined plane
+# TODO: operator     : tool that makes a face on an set angle relative to a user defined baseline: kind of an offset angle
+# TODO: operator     : measure angle to a set plane
+# TODO: operator     : the radius cutting spheres should be alligned with their top towards the cone axis
+# TODO: operator     : ricochet line tool with adjustable mirror line
+# TODO: operator     : click on plane and place an object with a give height on that location perpendicular to the face
+#
+# TODO: ui           : trajectory projection, add toggle  to forward or back projection
+# TODO: ui           : add logo and version to panel
+# TODO: ui           : custom icons
+# TODO: ui           : place parametric humanoid m/f figure
+# TODO: ui           : checkbox to retain tracking of the cone to secondary point
+# TODO: ui           : toggle radius cutter,
+# TODO: ui           : add icon to circle fit "MESH_CIRCLE"
+# TODO: ui           : add icon to plane fit "MESH_PLANE"
+# TODO: ui           : add icon to sphere fit "MESH UV SPHERE"
+# TODO: ui           : add icon to cylinder fit "MESH_CYCLINDER"
+# TODO: ui           : add icon to line fit "FIXED_SIZE"
+#
+# TODO: research     : create a voxel mesh from a pointcloud (embed numpy and open3d)
+# TODO: research     : embed pnppoint
+# TODO: research     : add edge to mesh line function
+# TODO: research     : hide pointcloud outside of frustum
+# TODO: research     : limitbox on mesh, or a crossection option
+# TODO: research     : fix dependencys by using "wheels"
+#
+# TODO: shader       : make cone and radius sphere density increase as the length grow longer.
+#
+#-----------------------------------------------------------------------------------------------------------------------------------------------------#
+# --- fitting tools ---
+# todo: intercect 3 plane corner with rms reporting
+#
+#-----------------------------------------------------------------------------------------------------------------------------------------------------#
+#--- measuring
+# angle measurement in 10th degree angle, with clear renderable labels
+# dimension lines with clear renderable labels
+#
+# 360 poly protractor 1 axix
+#   360 poly protractor 2 axis
+#   360 poly protractor 3axis
+# 180 poly protractor 2 axis
+# 180 poly protractor 3axis
+#
+#-----------------------------------------------------------------------------------------------------------------------------------------------------#
+# TODO: bug         : the circulair grid applys double the origin offset while drawing 
+# TODO: bug         : angular protractor is not showing
+# TODO: bug         : the circular grid allignment is off the option isn sed
