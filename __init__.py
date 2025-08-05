@@ -110,3 +110,32 @@ def unregister():
 
 if __name__ == "__main__":
     register()
+    #Import IPython
+    #IPython.embed()
+
+    ''''
+    # In the middle of a script you may want to inspect variables, run functions and inspect the flow.
+
+    import code
+    code.interact(local=locals())
+    
+    # If you want to access both global and local variables run this:
+
+    import code
+    namespace = globals().copy()
+    namespace.update(locals())
+    code.interact(local=namespace)
+    
+    # The next example is an equivalent single line version of the script above which is easier to paste into your code:
+
+    __import__('code').interact(local=dict(globals(), **locals()))
+    
+    # code.interact can be added at any line in the script and will pause the script to launch an interactive interpreter in the terminal, when you’re done you can quit the interpreter and the script will continue execution.
+
+    # If you have IPython installed you can use its embed() function which uses the current namespace. The IPython prompt has auto-complete and some useful features that the standard Python eval-loop doesn’t have.
+
+    import IPython
+    IPython.embed()
+    
+    # Admittedly this highlights the lack of any Python debugging support built into Blender, but its still a handy thing to know.
+'''
