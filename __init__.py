@@ -110,10 +110,12 @@ def unregister():
 
 if __name__ == "__main__":
     register()
-    #Import IPython
-    #IPython.embed()
 
     ''''
+    #from the blender documentation:
+    # https://docs.blender.org/manual/en/latest/advanced/scripting/python_api/interactive
+
+    
     # In the middle of a script you may want to inspect variables, run functions and inspect the flow.
 
     import code
